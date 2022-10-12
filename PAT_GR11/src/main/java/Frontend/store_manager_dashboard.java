@@ -8,6 +8,7 @@ package Frontend;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import javax.swing.JPanel;
  * @author Neeraav Ranjit
  */
 public class store_manager_dashboard extends javax.swing.JFrame {
-
+//
     private JPanel current_button;
     private JLabel current_label;
     /**
@@ -29,6 +30,9 @@ public class store_manager_dashboard extends javax.swing.JFrame {
      */
     public store_manager_dashboard() {
         initComponents();
+        
+        setCustomFont(logo_label1);
+        setCustomFont(logo_label2);
         
         current_button = dashboard_button_panel;
     }
@@ -54,6 +58,7 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         logo_label = new javax.swing.JLabel();
         panel_right = new javax.swing.JPanel();
         sales_panel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         inventory_panel = new javax.swing.JPanel();
         logo_label2 = new javax.swing.JLabel();
         statistics_panel = new javax.swing.JPanel();
@@ -235,15 +240,23 @@ public class store_manager_dashboard extends javax.swing.JFrame {
 
         sales_panel.setBackground(new java.awt.Color(246, 70, 104));
 
+        jLabel1.setText("Sales");
+
         javax.swing.GroupLayout sales_panelLayout = new javax.swing.GroupLayout(sales_panel);
         sales_panel.setLayout(sales_panelLayout);
         sales_panelLayout.setHorizontalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+            .addGroup(sales_panelLayout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         sales_panelLayout.setVerticalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(sales_panelLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(442, Short.MAX_VALUE))
         );
 
         panel_right.add(sales_panel, "card2");
@@ -268,16 +281,14 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         inventory_panelLayout.setHorizontalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
                 .addComponent(logo_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(0, 149, Short.MAX_VALUE))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
                 .addComponent(logo_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addGap(0, 515, Short.MAX_VALUE))
         );
 
         panel_right.add(inventory_panel, "card3");
@@ -350,15 +361,32 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel oldL, JLabel newL){
+    private void setCustomFont(JLabel label){
+        
+    try {
+
+    Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("AmbarPearlPersonalUse-0nBz.ttf")).deriveFont(12f);
+    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    label.setFont(customFont);
+    
+        ge.registerFont(customFont);
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch(FontFormatException e) {
+        e.printStackTrace();
+    }      
+        
+    }
+    
+    private void changeBackgroundColor(JPanel newP, JPanel old){
         Color off = new Color(65,67,106);
         Color on = new Color(254,150,103);
         Color label_off = new Color(254,150,103);
         Color label_on = new Color(255,255,255);
-        newP.setBackground(on);
-        oldP.setBackground(off);
-        newL.setForeground(label_on);
-        oldL.setForeground(label_off);
+//        newP.setBackground(on);
+//        oldP.setBackground(off);
+//        newL.setForeground(label_on);
+//        oldL.setForeground(label_off);
     }
     
     
@@ -439,6 +467,7 @@ public class store_manager_dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel inventory_button_panel;
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel logo_label;
     private javax.swing.JLabel logo_label1;
     private javax.swing.JLabel logo_label2;
