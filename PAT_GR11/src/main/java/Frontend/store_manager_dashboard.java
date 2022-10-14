@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frontend;
 
 import java.awt.Color;
@@ -14,27 +9,82 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Neeraav Ranjit
- */
 public class store_manager_dashboard extends javax.swing.JFrame {
-//
+
     private JPanel current_button;
     private JLabel current_label;
-    /**
-     * Creates new form store_manager_dashboard
-     */
+
+    private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel oldL,JLabel newL){
+        Color off = new Color(65,67,106);
+        Color on = new Color(254,150,103);
+        Color label_off = new Color(254,150,103);
+        Color label_on = new Color(255,255,255);
+        newP.setBackground(on);
+        oldP.setBackground(off);
+        newL.setForeground(label_on);
+        oldL.setForeground(label_off);
+    }    
+    
+    
+    
+    
+    
+    
     public store_manager_dashboard() {
         initComponents();
         
-        setCustomFont(logo_label1);
-        setCustomFont(logo_label2);
+        setCustomFont(dashboard_screen_label);
+        setCustomFont(sales_screen_label);
+        setCustomFont(inventory_screen_label);
+        setCustomFont(statistics_panel_label);
         
         current_button = dashboard_button_panel;
+        current_label = dashboard_label;
+        
+        //combo box
+        DefaultComboBoxModel cbm = new  DefaultComboBoxModel();
+        cbm.addElement("Toys");
+        cbm.addElement("Food");
+        cbm.addElement("Clothes");
+        
+        jComboBox1.setModel(cbm);
+        
+        
+        //Jlist
+        DefaultListModel lm = new DefaultListModel();
+        lm.addElement("John");
+        lm.addElement("Ice Cream");
+        lm.addElement("Chocolate");
+        jList1.setModel(lm);
+        
+        
+        //table
+        String [] column_names = new String[3];
+        column_names[0] = "Product";
+        column_names[1] = "Quantity";
+        column_names[2] = "Price";
+        
+        String [][] data = new String[50][3];
+        data[0][0] = "john";
+        data[0][1] = "shelby";
+        data[0][2] = "30";
+        data[1][0] = "Emma";
+        data[1][1] = "Watson";
+        data[1][2] = "30";
+        
+        
+        DefaultTableModel tbl_model = new DefaultTableModel(data, column_names);
+        jTable1.setModel(tbl_model);
+        
+        
+   
+        
     }
 
     /**
@@ -56,13 +106,21 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         statistics_button_panel = new javax.swing.JPanel();
         statistics_label = new javax.swing.JLabel();
         logo_label = new javax.swing.JLabel();
-        panel_right = new javax.swing.JPanel();
+        parent_panel = new javax.swing.JPanel();
+        dashboard_panel = new javax.swing.JPanel();
+        dashboard_screen_label = new javax.swing.JLabel();
         sales_panel = new javax.swing.JPanel();
+        sales_screen_label = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         inventory_panel = new javax.swing.JPanel();
-        logo_label2 = new javax.swing.JLabel();
+        inventory_screen_label = new javax.swing.JLabel();
         statistics_panel = new javax.swing.JPanel();
-        logo_label1 = new javax.swing.JLabel();
+        statistics_panel_label = new javax.swing.JLabel();
         panel_middle = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -235,31 +293,94 @@ public class store_manager_dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_right.setBackground(new java.awt.Color(246, 70, 104));
-        panel_right.setLayout(new java.awt.CardLayout());
+        parent_panel.setBackground(new java.awt.Color(246, 70, 104));
+        parent_panel.setLayout(new java.awt.CardLayout());
+
+        dashboard_panel.setBackground(new java.awt.Color(246, 70, 104));
+
+        dashboard_screen_label.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        dashboard_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+        dashboard_screen_label.setText("Dashboard");
+
+        javax.swing.GroupLayout dashboard_panelLayout = new javax.swing.GroupLayout(dashboard_panel);
+        dashboard_panel.setLayout(dashboard_panelLayout);
+        dashboard_panelLayout.setHorizontalGroup(
+            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboard_panelLayout.createSequentialGroup()
+                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 510, Short.MAX_VALUE))
+        );
+        dashboard_panelLayout.setVerticalGroup(
+            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboard_panelLayout.createSequentialGroup()
+                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 494, Short.MAX_VALUE))
+        );
+
+        parent_panel.add(dashboard_panel, "card5");
 
         sales_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        jLabel1.setText("Sales");
+        sales_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+        sales_screen_label.setText("Sales");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("Category");
 
         javax.swing.GroupLayout sales_panelLayout = new javax.swing.GroupLayout(sales_panel);
         sales_panel.setLayout(sales_panelLayout);
         sales_panelLayout.setHorizontalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sales_screen_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(sales_panelLayout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         sales_panelLayout.setVerticalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_panelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addComponent(sales_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(4, 4, 4)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        panel_right.add(sales_panel, "card2");
+        parent_panel.add(sales_panel, "card2");
 
         inventory_panel.setBackground(new java.awt.Color(246, 70, 104));
 
@@ -268,10 +389,10 @@ public class store_manager_dashboard extends javax.swing.JFrame {
                 new File("AmbarPearlPersonalUse-0nBz.ttf"));
             Font bold = font.deriveFont(Font.BOLD, 12);
             Font plain = font.deriveFont(Font.PLAIN, 24);
-            logo_label2.setForeground(new java.awt.Color(254, 150, 103));
-            logo_label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            logo_label2.setText("Inventory");
-            logo_label2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            inventory_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+            inventory_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            inventory_screen_label.setText("Inventory");
+            inventory_screen_label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         } catch (FontFormatException | IOException e){
             e.printStackTrace();
         }
@@ -281,17 +402,17 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         inventory_panelLayout.setHorizontalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addComponent(logo_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 149, Short.MAX_VALUE))
+                .addComponent(inventory_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 296, Short.MAX_VALUE))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addComponent(logo_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inventory_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 515, Short.MAX_VALUE))
         );
 
-        panel_right.add(inventory_panel, "card3");
+        parent_panel.add(inventory_panel, "card3");
 
         statistics_panel.setBackground(new java.awt.Color(246, 70, 104));
 
@@ -300,10 +421,10 @@ public class store_manager_dashboard extends javax.swing.JFrame {
                 new File("AmbarPearlPersonalUse-0nBz.ttf"));
             Font bold = font.deriveFont(Font.BOLD, 12);
             Font plain = font.deriveFont(Font.PLAIN, 24);
-            logo_label1.setForeground(new java.awt.Color(254, 150, 103));
-            logo_label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            logo_label1.setText("Statistics");
-            logo_label1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            statistics_panel_label.setForeground(new java.awt.Color(254, 150, 103));
+            statistics_panel_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            statistics_panel_label.setText("Statistics");
+            statistics_panel_label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         } catch (FontFormatException | IOException e){
             e.printStackTrace();
         }
@@ -314,18 +435,18 @@ public class store_manager_dashboard extends javax.swing.JFrame {
             statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statistics_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logo_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(statistics_panel_label, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         statistics_panelLayout.setVerticalGroup(
             statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statistics_panelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(logo_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statistics_panel_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(493, Short.MAX_VALUE))
         );
 
-        panel_right.add(statistics_panel, "card4");
+        parent_panel.add(statistics_panel, "card4");
 
         panel_middle.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -349,17 +470,59 @@ public class store_manager_dashboard extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(panel_middle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panel_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(parent_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel_left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panel_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(parent_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panel_middle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void statistics_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistics_button_panelMouseClicked
+        changeBackgroundColor(statistics_button_panel, current_button,statistics_label,current_label);
+        
+        current_button = statistics_button_panel;
+        parent_panel.removeAll();
+        parent_panel.add(statistics_panel);
+        parent_panel.repaint();
+        parent_panel.revalidate();
+    }//GEN-LAST:event_statistics_button_panelMouseClicked
+
+    private void inventory_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventory_button_panelMouseClicked
+        changeBackgroundColor(inventory_button_panel, current_button,inventory_label,current_label);
+        current_button = inventory_button_panel;
+        parent_panel.removeAll();
+        parent_panel.add(inventory_panel);
+        parent_panel.repaint();
+        parent_panel.revalidate();
+    }//GEN-LAST:event_inventory_button_panelMouseClicked
+
+    private void sales_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sales_button_panelMouseClicked
+
+        //        sales_button_panel.setBackground(254,150,103);
+        changeBackgroundColor(sales_button_panel, current_button,sales_label,current_label);
+        sales_label.setForeground(Color.WHITE);
+        current_button = sales_button_panel;
+        parent_panel.removeAll();
+        parent_panel.add(sales_panel);
+        parent_panel.repaint();
+        parent_panel.revalidate();
+
+    }//GEN-LAST:event_sales_button_panelMouseClicked
+
+    private void dashboard_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboard_button_panelMouseClicked
+        changeBackgroundColor(dashboard_button_panel, current_button,dashboard_label,current_label);
+        current_button = dashboard_button_panel;
+        parent_panel.removeAll();
+        parent_panel.add(dashboard_panel);
+        parent_panel.repaint();
+        parent_panel.revalidate();
+
+    }//GEN-LAST:event_dashboard_button_panelMouseClicked
 
     private void setCustomFont(JLabel label){
         
@@ -378,54 +541,9 @@ public class store_manager_dashboard extends javax.swing.JFrame {
         
     }
     
-    private void changeBackgroundColor(JPanel newP, JPanel old){
-        Color off = new Color(65,67,106);
-        Color on = new Color(254,150,103);
-        Color label_off = new Color(254,150,103);
-        Color label_on = new Color(255,255,255);
-//        newP.setBackground(on);
-//        oldP.setBackground(off);
-//        newL.setForeground(label_on);
-//        oldL.setForeground(label_off);
-    }
+
     
     
-    private void sales_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sales_button_panelMouseClicked
-        
-//        sales_button_panel.setBackground(254,150,103);
-         changeBackgroundColor(sales_button_panel, current_button);
-        current_button = sales_button_panel;
-        panel_right.removeAll();
-        panel_right.add(sales_panel);
-        panel_right.repaint();
-        panel_right.revalidate();
-       
-    }//GEN-LAST:event_sales_button_panelMouseClicked
-
-    private void inventory_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventory_button_panelMouseClicked
-         changeBackgroundColor(inventory_button_panel, current_button);
-        current_button = inventory_button_panel;
-        panel_right.removeAll();
-        panel_right.add(inventory_panel);
-        panel_right.repaint();
-        panel_right.revalidate();
-    }//GEN-LAST:event_inventory_button_panelMouseClicked
-
-    private void statistics_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistics_button_panelMouseClicked
-                 changeBackgroundColor(statistics_button_panel, current_button);
-        current_button = statistics_button_panel;
-        panel_right.removeAll();
-        panel_right.add(statistics_panel);
-        panel_right.repaint();
-        panel_right.revalidate();
-    }//GEN-LAST:event_statistics_button_panelMouseClicked
-
-    private void dashboard_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboard_button_panelMouseClicked
-        changeBackgroundColor(dashboard_button_panel, current_button);
-        current_button = dashboard_button_panel;
-        
-    }//GEN-LAST:event_dashboard_button_panelMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -464,21 +582,29 @@ public class store_manager_dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel dashboard_button_panel;
     private javax.swing.JLabel dashboard_label;
+    private javax.swing.JPanel dashboard_panel;
+    private javax.swing.JLabel dashboard_screen_label;
     private javax.swing.JPanel inventory_button_panel;
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
+    private javax.swing.JLabel inventory_screen_label;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo_label;
-    private javax.swing.JLabel logo_label1;
-    private javax.swing.JLabel logo_label2;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
-    private javax.swing.JPanel panel_right;
+    private javax.swing.JPanel parent_panel;
     private javax.swing.JPanel sales_button_panel;
     private javax.swing.JLabel sales_label;
     private javax.swing.JPanel sales_panel;
+    private javax.swing.JLabel sales_screen_label;
     private javax.swing.JPanel statistics_button_panel;
     private javax.swing.JLabel statistics_label;
     private javax.swing.JPanel statistics_panel;
+    private javax.swing.JLabel statistics_panel_label;
     // End of variables declaration//GEN-END:variables
 }
