@@ -18,12 +18,12 @@ import javax.swing.UIManager;
  *
  * @author Neeraav Ranjit
  */
-public class login_section extends javax.swing.JFrame {
+public class LoginScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form login_section
      */
-    public login_section() {
+    public LoginScreen() {
         initComponents();
     }
 
@@ -36,7 +36,6 @@ public class login_section extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         sign_in_panel_tab = new javax.swing.JPanel();
         panel_left = new javax.swing.JPanel();
         LogoLabel = new javax.swing.JLabel();
@@ -50,13 +49,8 @@ public class login_section extends javax.swing.JFrame {
         panel_right = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogoLabel1 = new javax.swing.JLabel();
-        sign_up_panel_tab = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
-        jTabbedPane2.setBackground(new java.awt.Color(246, 70, 104));
-        jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
 
         panel_left.setBackground(new java.awt.Color(152, 64, 99));
 
@@ -199,7 +193,7 @@ public class login_section extends javax.swing.JFrame {
             .addGroup(panel_rightLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(LogoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -216,36 +210,27 @@ public class login_section extends javax.swing.JFrame {
         sign_in_panel_tabLayout.setVerticalGroup(
             sign_in_panel_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sign_in_panel_tabLayout.createSequentialGroup()
-                .addGroup(sign_in_panel_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panel_left, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_right, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(sign_in_panel_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jTabbedPane2.addTab("Sign In", sign_in_panel_tab);
-
-        javax.swing.GroupLayout sign_up_panel_tabLayout = new javax.swing.GroupLayout(sign_up_panel_tab);
-        sign_up_panel_tab.setLayout(sign_up_panel_tabLayout);
-        sign_up_panel_tabLayout.setHorizontalGroup(
-            sign_up_panel_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1303, Short.MAX_VALUE)
-        );
-        sign_up_panel_tabLayout.setVerticalGroup(
-            sign_up_panel_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Sign up", sign_up_panel_tab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sign_in_panel_tab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sign_in_panel_tab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -264,7 +249,7 @@ public class login_section extends javax.swing.JFrame {
     }//GEN-LAST:event_username_text_fieldMouseClicked
 
     private void enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_buttonActionPerformed
-        store_manager_dashboard dashboard_screen = new store_manager_dashboard();
+        StoreManagerScreen dashboard_screen = new StoreManagerScreen();
         dashboard_screen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_enter_buttonActionPerformed
@@ -286,19 +271,19 @@ public class login_section extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login_section.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login_section.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login_section.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login_section.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login_section().setVisible(true);
+                new LoginScreen().setVisible(true);
             }
         });
     }
@@ -312,12 +297,10 @@ public class login_section extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_right;
     private javax.swing.JPasswordField password_field;
     private javax.swing.JPanel sign_in_panel_tab;
-    private javax.swing.JPanel sign_up_panel_tab;
     private javax.swing.JTextField username_text_field;
     // End of variables declaration//GEN-END:variables
 }
