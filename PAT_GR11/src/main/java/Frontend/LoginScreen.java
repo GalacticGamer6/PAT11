@@ -5,6 +5,8 @@
  */
 package Frontend;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 /**
@@ -25,6 +28,11 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
+        
+        ImageIcon main = new ImageIcon("src\\main\\resources\\login_screen Images\\Ferris Wheel 64x.png");
+        this.setIconImage(main.getImage());     
+        this.setTitle("Login");
+        
     }
 
     /**
@@ -44,13 +52,15 @@ public class LoginScreen extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        enter_button = new javax.swing.JButton();
+        store_enter_button = new javax.swing.JButton();
         password_field = new javax.swing.JPasswordField();
+        fair_enter_button = new javax.swing.JButton();
         panel_right = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogoLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
 
         panel_left.setBackground(new java.awt.Color(152, 64, 99));
 
@@ -98,11 +108,12 @@ public class LoginScreen extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(254, 150, 103));
         jSeparator2.setForeground(new java.awt.Color(254, 150, 103));
 
-        enter_button.setBackground(new java.awt.Color(254, 150, 103));
-        enter_button.setText("ENTER");
-        enter_button.addActionListener(new java.awt.event.ActionListener() {
+        store_enter_button.setBackground(new java.awt.Color(254, 150, 103));
+        store_enter_button.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        store_enter_button.setText("ENTER STORE");
+        store_enter_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enter_buttonActionPerformed(evt);
+                store_enter_buttonActionPerformed(evt);
             }
         });
 
@@ -115,6 +126,15 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
+        fair_enter_button.setBackground(new java.awt.Color(254, 150, 103));
+        fair_enter_button.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        fair_enter_button.setText("ENTER FAIR");
+        fair_enter_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fair_enter_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_leftLayout = new javax.swing.GroupLayout(panel_left);
         panel_left.setLayout(panel_leftLayout);
         panel_leftLayout.setHorizontalGroup(
@@ -122,7 +142,6 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(panel_leftLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,7 +149,11 @@ public class LoginScreen extends javax.swing.JFrame {
                         .addComponent(password_field, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(username_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                         .addComponent(jSeparator1)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(panel_leftLayout.createSequentialGroup()
+                        .addComponent(store_enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138)
+                        .addComponent(fair_enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(305, Short.MAX_VALUE))
         );
         panel_leftLayout.setVerticalGroup(
@@ -151,7 +174,9 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(enter_button)
+                .addGroup(panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(store_enter_button)
+                    .addComponent(fair_enter_button))
                 .addGap(63, 63, 63))
         );
 
@@ -193,7 +218,7 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(panel_rightLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(LogoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -248,39 +273,23 @@ public class LoginScreen extends javax.swing.JFrame {
         username_text_field.setText("");
     }//GEN-LAST:event_username_text_fieldMouseClicked
 
-    private void enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_buttonActionPerformed
-        StoreManagerScreen dashboard_screen = new StoreManagerScreen();
-        dashboard_screen.setVisible(true);
+    private void store_enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_store_enter_buttonActionPerformed
+        StoreManagerScreen sm = new StoreManagerScreen();
+        sm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_enter_buttonActionPerformed
+    }//GEN-LAST:event_store_enter_buttonActionPerformed
+
+    private void fair_enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fair_enter_buttonActionPerformed
+        FairManagerScreen fm = new FairManagerScreen();
+        fm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_fair_enter_buttonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the form */
+        FlatDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginScreen().setVisible(true);
@@ -291,7 +300,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel LogoLabel1;
-    private javax.swing.JButton enter_button;
+    private javax.swing.JButton fair_enter_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -301,6 +310,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JPanel panel_right;
     private javax.swing.JPasswordField password_field;
     private javax.swing.JPanel sign_in_panel_tab;
+    private javax.swing.JButton store_enter_button;
     private javax.swing.JTextField username_text_field;
     // End of variables declaration//GEN-END:variables
 }
