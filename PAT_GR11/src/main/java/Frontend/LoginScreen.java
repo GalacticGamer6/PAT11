@@ -10,12 +10,14 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.geom.FlatteningPathIterator;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -288,8 +290,13 @@ public class LoginScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        FlatDarkLaf.setup();
+
+        public static void main(String args[]) {
+            
+            FlatDarkLaf.setup();
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginScreen().setVisible(true);
