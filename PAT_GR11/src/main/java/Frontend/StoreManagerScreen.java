@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.ManagerClasses.ProductManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -20,7 +21,9 @@ public class StoreManagerScreen extends javax.swing.JFrame {
 
     private JPanel current_button;
     private JLabel current_label;
-
+    private ProductManager pm = new ProductManager();
+    
+    
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
         Color on = new Color(254,150,103);
@@ -40,11 +43,13 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     public StoreManagerScreen() {
         
         initComponents();
+        
         //setting up titles and Images 
         this.setTitle("Store Management");
         ImageIcon main = new ImageIcon("src\\main\\resources\\login_screen Images\\Ferris Wheel 64x.png");
         this.setIconImage(main.getImage());    
         
+        //Setting Custom Fonts and Making Panels Change colour
         setCustomFont(dashboard_screen_label);
         setCustomFont(sales_screen_label);
         setCustomFont(inventory_screen_label);
@@ -52,6 +57,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         
         current_button = dashboard_button_panel;
         current_label = dashboard_label;
+        
         
         //combo box
         DefaultComboBoxModel cbm = new  DefaultComboBoxModel();
@@ -67,7 +73,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         lm.addElement("John");
         lm.addElement("Ice Cream");
         lm.addElement("Chocolate");
-        jList1.setModel(lm);
+        available_products_list.setModel(lm);
         
         
         //table
@@ -86,7 +92,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         
         
         DefaultTableModel tbl_model = new DefaultTableModel(data, column_names);
-        jTable1.setModel(tbl_model);
+        list_of_sales.setModel(tbl_model);
         
         
    
@@ -108,9 +114,9 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         sales_panel = new javax.swing.JPanel();
         sales_screen_label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        available_products_list = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        list_of_sales = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
         sell_products_button = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
@@ -196,14 +202,14 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         sales_screen_label.setForeground(new java.awt.Color(254, 150, 103));
         sales_screen_label.setText("Sales");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        available_products_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(available_products_list);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        list_of_sales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -214,7 +220,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(list_of_sales);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -848,6 +854,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> available_products_list;
     private javax.swing.JPanel dashboard_button_panel;
     private javax.swing.JLabel dashboard_label;
     private javax.swing.JPanel dashboard_panel;
@@ -878,12 +885,10 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -894,6 +899,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable list_of_sales;
     private javax.swing.JLabel logo_label;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;

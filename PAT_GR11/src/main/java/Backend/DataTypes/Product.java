@@ -1,19 +1,20 @@
-package Backend;
+package Backend.DataTypes;
  
 
 
 public class Product {
     
-    private static String name;
-    private static String store_name;
-    private static double cost_price;
-    private static double selling_price;
-    private static String category;
-    private static int INITIAL_QUANTITY;
-    private static int quantity;
+    private  String name;
+    private  String store_name;
+    private  double cost_price;
+    private  double selling_price;
+    private  String category;
+    private  int INITIAL_QUANTITY;
+    private  int quantity;
+    private  int num_sold;
     
     
-    public Product(String n, String sn, double cp, double sp, String c, int q){
+    public Product(String n, String sn, double cp, double sp, String c, int q, int ns){
         
         name = n;
         store_name = sn;
@@ -22,6 +23,7 @@ public class Product {
         category = c;
         INITIAL_QUANTITY = q;
         quantity = q;
+        num_sold = ns;
         
     }
     
@@ -53,5 +55,14 @@ public class Product {
         return store_name;
     }
     
+    public int getNumSold(){
+        return num_sold;
+    }
+    
+    public String toString(){
+        
+        return "{ " + name + " " + store_name + " " + cost_price + " " + selling_price + " " + category + " " + quantity + " " + num_sold + " }";
+        
+    }
     
 }
