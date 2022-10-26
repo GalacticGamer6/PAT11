@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.DataTypes.Product;
 import Backend.ManagerClasses.ProductManager;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,8 +22,6 @@ public class StoreManagerScreen extends javax.swing.JFrame {
 
     private JPanel current_button;
     private JLabel current_label;
-    private ProductManager pm = new ProductManager();
-    
     
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
@@ -127,17 +126,17 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        product_name_field = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cost_price_field = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        selling_price_field = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        category_combo_box = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        quantity_spinner = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        add_prodcut_button = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         statistics_panel = new javax.swing.JPanel();
@@ -318,7 +317,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel6.setText("Category ;");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        category_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel7.setText("Quantity");
@@ -327,7 +326,12 @@ public class StoreManagerScreen extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(254, 150, 103));
         jLabel8.setText("REMOVE PRODUCT");
 
-        jButton1.setText("ADD");
+        add_prodcut_button.setText("ADD");
+        add_prodcut_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_prodcut_buttonActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -358,13 +362,13 @@ public class StoreManagerScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel7))
                             .addGap(63, 63, 63)
                             .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(product_name_field)
+                                .addComponent(cost_price_field)
+                                .addComponent(selling_price_field, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                .addComponent(category_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add_prodcut_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
@@ -383,26 +387,26 @@ public class StoreManagerScreen extends javax.swing.JFrame {
                     .addGroup(inventory_panelLayout.createSequentialGroup()
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(product_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cost_price_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(inventory_panelLayout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selling_price_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(category_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add_prodcut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -798,6 +802,11 @@ public class StoreManagerScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dashboard_button_panelMouseClicked
 
+    private void add_prodcut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_prodcut_buttonActionPerformed
+        //name, storename, cost, sell,category, quantity, numbersold
+        Product P = new Product(product_name_field.getText(), store_name, cost_price_field.getText(),selling_price_field.getText() , category_combo_box.getSelectedItem(),quantity_spinner.getValue(), 0);
+    }//GEN-LAST:event_add_prodcut_buttonActionPerformed
+
     private void setCustomFont(JLabel label){
         
     try {
@@ -854,7 +863,10 @@ public class StoreManagerScreen extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add_prodcut_button;
     private javax.swing.JList<String> available_products_list;
+    private javax.swing.JComboBox<String> category_combo_box;
+    private javax.swing.JTextField cost_price_field;
     private javax.swing.JPanel dashboard_button_panel;
     private javax.swing.JLabel dashboard_label;
     private javax.swing.JPanel dashboard_panel;
@@ -863,10 +875,8 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
     private javax.swing.JLabel inventory_screen_label;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
@@ -888,11 +898,7 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
@@ -904,11 +910,14 @@ public class StoreManagerScreen extends javax.swing.JFrame {
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
     private javax.swing.JPanel parent_panel;
+    private javax.swing.JTextField product_name_field;
+    private javax.swing.JSpinner quantity_spinner;
     private javax.swing.JPanel sales_button_panel;
     private javax.swing.JLabel sales_label;
     private javax.swing.JPanel sales_panel;
     private javax.swing.JLabel sales_screen_label;
     private javax.swing.JButton sell_products_button;
+    private javax.swing.JTextField selling_price_field;
     private javax.swing.JPanel statistics_button_panel;
     private javax.swing.JLabel statistics_label;
     private javax.swing.JPanel statistics_panel;

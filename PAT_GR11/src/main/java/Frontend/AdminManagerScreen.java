@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-public class FairManagerScreen extends javax.swing.JFrame {
+public class AdminManagerScreen extends javax.swing.JFrame {
 
     private JPanel current_button;
     private JLabel current_label;
@@ -37,7 +37,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     
     
     
-    public FairManagerScreen() {
+    public AdminManagerScreen() {
         
         initComponents();
         //setting up titles and Images 
@@ -45,13 +45,13 @@ public class FairManagerScreen extends javax.swing.JFrame {
         ImageIcon main = new ImageIcon("src\\main\\resources\\login_screen Images\\Ferris Wheel 64x.png");
         this.setIconImage(main.getImage());    
         
-        setCustomFont(dashboard_screen_label);
+        setCustomFont(fair_management_screen_label);
         setCustomFont(sales_screen_label);
 //        setCustomFont(inventory_screen_label);
         setCustomFont(statistics_panel_label);
         
-        current_button = dashboard_button_panel;
-        current_label = dashboard_label;
+        current_button = fair_management_button_panel;
+        current_label = fair_management_label;
            
         
     }
@@ -65,20 +65,42 @@ public class FairManagerScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         parent_panel = new javax.swing.JPanel();
-        dashboard_panel = new javax.swing.JPanel();
-        dashboard_screen_label = new javax.swing.JLabel();
+        fair_management_panel = new javax.swing.JPanel();
+        fair_management_screen_label = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
         entrance_management_panel = new javax.swing.JPanel();
         sales_screen_label = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        adult_entranct_fee_text_field = new javax.swing.JTextField();
+        children_entrance_fee_text_field = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jSpinner2 = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jTextField10 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         fair_statistics_panel = new javax.swing.JPanel();
@@ -109,15 +131,15 @@ public class FairManagerScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         panel_middle = new javax.swing.JPanel();
         panel_left = new javax.swing.JPanel();
-        dashboard_button_panel = new javax.swing.JPanel();
-        dashboard_label = new javax.swing.JLabel();
-        sales_button_panel = new javax.swing.JPanel();
-        sales_label = new javax.swing.JLabel();
-        inventory_button_panel = new javax.swing.JPanel();
-        inventory_label = new javax.swing.JLabel();
-        statistics_button_panel = new javax.swing.JPanel();
-        statistics_label = new javax.swing.JLabel();
+        fair_management_button_panel = new javax.swing.JPanel();
+        fair_management_label = new javax.swing.JLabel();
+        store_management_button_panel = new javax.swing.JPanel();
+        user_management_label1 = new javax.swing.JLabel();
+        user_management_button_panel = new javax.swing.JPanel();
+        user_management_label = new javax.swing.JLabel();
         logo_label = new javax.swing.JLabel();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -125,32 +147,130 @@ public class FairManagerScreen extends javax.swing.JFrame {
         parent_panel.setBackground(new java.awt.Color(246, 70, 104));
         parent_panel.setLayout(new java.awt.CardLayout());
 
-        dashboard_panel.setBackground(new java.awt.Color(246, 70, 104));
+        fair_management_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        dashboard_screen_label.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        dashboard_screen_label.setForeground(new java.awt.Color(254, 150, 103));
-        dashboard_screen_label.setText("Dashboard");
+        fair_management_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        fair_management_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+        fair_management_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fair_management_screen_label.setText("FAIR MANAGEMENT");
 
-        javax.swing.GroupLayout dashboard_panelLayout = new javax.swing.GroupLayout(dashboard_panel);
-        dashboard_panel.setLayout(dashboard_panelLayout);
-        dashboard_panelLayout.setHorizontalGroup(
-            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_panelLayout.createSequentialGroup()
-                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 637, Short.MAX_VALUE))
+        jSeparator1.setForeground(new java.awt.Color(254, 150, 103));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Number Of Stores", "Entrance Fee", "Profit", "Duration"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable3);
+
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel3.setText("FAIR LIST:");
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel4.setText("ADD FAIR:");
+
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel5.setText("Name:");
+
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel6.setText("Entrance Fee:");
+
+        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel7.setText("Duration(Days):");
+
+        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel8.setText("DELETE FAIR:");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
+
+        jButton1.setText("DELETE");
+
+        javax.swing.GroupLayout fair_management_panelLayout = new javax.swing.GroupLayout(fair_management_panel);
+        fair_management_panel.setLayout(fair_management_panelLayout);
+        fair_management_panelLayout.setHorizontalGroup(
+            fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fair_management_panelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(fair_management_screen_label, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                        .addComponent(jSeparator1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(fair_management_panelLayout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(fair_management_panelLayout.createSequentialGroup()
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(fair_management_panelLayout.createSequentialGroup()
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
-        dashboard_panelLayout.setVerticalGroup(
-            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_panelLayout.createSequentialGroup()
-                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 516, Short.MAX_VALUE))
+        fair_management_panelLayout.setVerticalGroup(
+            fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fair_management_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fair_management_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(fair_management_panelLayout.createSequentialGroup()
+                        .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(fair_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        parent_panel.add(dashboard_panel, "card5");
+        parent_panel.add(fair_management_panel, "card5");
 
         entrance_management_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        sales_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         sales_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sales_screen_label.setText("Sales");
 
@@ -159,6 +279,14 @@ public class FairManagerScreen extends javax.swing.JFrame {
         jLabel16.setText("DAY:");
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel17.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel17.setText("Adult's Entrance Fee:");
+
+        jLabel18.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel18.setText("Children's Entrance Fee:");
 
         jLabel19.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(254, 150, 103));
@@ -172,9 +300,13 @@ public class FairManagerScreen extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel21.setText("People:");
+        jLabel21.setText("Adults:");
 
         jButton3.setText("SELL TICKETS");
+
+        jLabel22.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel22.setText("Children:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,23 +331,31 @@ public class FairManagerScreen extends javax.swing.JFrame {
             .addGroup(entrance_management_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(entrance_management_panelLayout.createSequentialGroup()
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(71, 71, 71)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(entrance_management_panelLayout.createSequentialGroup()
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(entrance_management_panelLayout.createSequentialGroup()
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17)
+                                .addGroup(entrance_management_panelLayout.createSequentialGroup()
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(25, 25, 25)
+                            .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(adult_entranct_fee_text_field)
+                                .addGroup(entrance_management_panelLayout.createSequentialGroup()
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(children_entrance_fee_text_field)
+                                .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSpinner3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,25 +366,34 @@ public class FairManagerScreen extends javax.swing.JFrame {
             .addGroup(entrance_management_panelLayout.createSequentialGroup()
                 .addComponent(sales_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(entrance_management_panelLayout.createSequentialGroup()
                         .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
+                        .addGap(28, 28, 28)
                         .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(entrance_management_panelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(entrance_management_panelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(242, 242, 242)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adult_entranct_fee_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(children_entrance_fee_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(122, 122, 122)
+                        .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(entrance_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -443,11 +592,11 @@ public class FairManagerScreen extends javax.swing.JFrame {
         stores_panelLayout.setVerticalGroup(
             stores_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stores_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         parent_panel.add(stores_panel, "card3");
@@ -468,129 +617,92 @@ public class FairManagerScreen extends javax.swing.JFrame {
 
         panel_left.setBackground(new java.awt.Color(152, 64, 99));
 
-        dashboard_button_panel.setBackground(new java.awt.Color(254, 150, 103));
-        dashboard_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
-        dashboard_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+        fair_management_button_panel.setBackground(new java.awt.Color(254, 150, 103));
+        fair_management_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
+        fair_management_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dashboard_button_panelMouseClicked(evt);
+                fair_management_button_panelMouseClicked(evt);
             }
         });
 
-        dashboard_label.setBackground(new java.awt.Color(254, 150, 103));
-        dashboard_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        dashboard_label.setForeground(new java.awt.Color(255, 255, 255));
-        dashboard_label.setText("DASHBOARD");
+        fair_management_label.setBackground(new java.awt.Color(254, 150, 103));
+        fair_management_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        fair_management_label.setForeground(new java.awt.Color(255, 255, 255));
+        fair_management_label.setText("FAIR MANAGEMENT");
 
-        javax.swing.GroupLayout dashboard_button_panelLayout = new javax.swing.GroupLayout(dashboard_button_panel);
-        dashboard_button_panel.setLayout(dashboard_button_panelLayout);
-        dashboard_button_panelLayout.setHorizontalGroup(
-            dashboard_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_button_panelLayout.createSequentialGroup()
+        javax.swing.GroupLayout fair_management_button_panelLayout = new javax.swing.GroupLayout(fair_management_button_panel);
+        fair_management_button_panel.setLayout(fair_management_button_panelLayout);
+        fair_management_button_panelLayout.setHorizontalGroup(
+            fair_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fair_management_button_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dashboard_label)
+                .addComponent(fair_management_label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        dashboard_button_panelLayout.setVerticalGroup(
-            dashboard_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboard_button_panelLayout.createSequentialGroup()
+        fair_management_button_panelLayout.setVerticalGroup(
+            fair_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fair_management_button_panelLayout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(dashboard_label)
+                .addComponent(fair_management_label)
                 .addGap(16, 16, 16))
         );
 
-        sales_button_panel.setBackground(new java.awt.Color(65, 67, 106));
-        sales_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
-        sales_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+        store_management_button_panel.setBackground(new java.awt.Color(65, 67, 106));
+        store_management_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
+        store_management_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sales_button_panelMouseClicked(evt);
+                store_management_button_panelMouseClicked(evt);
             }
         });
 
-        sales_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        sales_label.setForeground(new java.awt.Color(254, 150, 103));
-        sales_label.setText("ENTRANCE MANAGEMENT");
+        user_management_label1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        user_management_label1.setForeground(new java.awt.Color(254, 150, 103));
+        user_management_label1.setText("STORE MANAGEMENT");
 
-        javax.swing.GroupLayout sales_button_panelLayout = new javax.swing.GroupLayout(sales_button_panel);
-        sales_button_panel.setLayout(sales_button_panelLayout);
-        sales_button_panelLayout.setHorizontalGroup(
-            sales_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sales_button_panelLayout.createSequentialGroup()
+        javax.swing.GroupLayout store_management_button_panelLayout = new javax.swing.GroupLayout(store_management_button_panel);
+        store_management_button_panel.setLayout(store_management_button_panelLayout);
+        store_management_button_panelLayout.setHorizontalGroup(
+            store_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(store_management_button_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sales_label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(user_management_label1)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
-        sales_button_panelLayout.setVerticalGroup(
-            sales_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sales_button_panelLayout.createSequentialGroup()
+        store_management_button_panelLayout.setVerticalGroup(
+            store_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(store_management_button_panelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(sales_label)
+                .addComponent(user_management_label1)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        inventory_button_panel.setBackground(new java.awt.Color(65, 67, 106));
-        inventory_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
-        inventory_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+        user_management_button_panel.setBackground(new java.awt.Color(65, 67, 106));
+        user_management_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
+        user_management_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inventory_button_panelMouseClicked(evt);
+                user_management_button_panelMouseClicked(evt);
             }
         });
 
-        inventory_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        inventory_label.setForeground(new java.awt.Color(254, 150, 103));
-        inventory_label.setText("STORES");
+        user_management_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        user_management_label.setForeground(new java.awt.Color(254, 150, 103));
+        user_management_label.setText("USER MANAGEMENT");
 
-        javax.swing.GroupLayout inventory_button_panelLayout = new javax.swing.GroupLayout(inventory_button_panel);
-        inventory_button_panel.setLayout(inventory_button_panelLayout);
-        inventory_button_panelLayout.setHorizontalGroup(
-            inventory_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
-            .addGroup(inventory_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inventory_button_panelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(inventory_label)
-                    .addContainerGap(240, Short.MAX_VALUE)))
+        javax.swing.GroupLayout user_management_button_panelLayout = new javax.swing.GroupLayout(user_management_button_panel);
+        user_management_button_panel.setLayout(user_management_button_panelLayout);
+        user_management_button_panelLayout.setHorizontalGroup(
+            user_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(user_management_button_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(user_management_label)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
-        inventory_button_panelLayout.setVerticalGroup(
-            inventory_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(inventory_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inventory_button_panelLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(inventory_label)
-                    .addContainerGap(13, Short.MAX_VALUE)))
-        );
-
-        statistics_button_panel.setBackground(new java.awt.Color(65, 67, 106));
-        statistics_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
-        statistics_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                statistics_button_panelMouseClicked(evt);
-            }
-        });
-
-        statistics_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        statistics_label.setForeground(new java.awt.Color(254, 150, 103));
-        statistics_label.setText("FAIR STATISTICS");
-
-        javax.swing.GroupLayout statistics_button_panelLayout = new javax.swing.GroupLayout(statistics_button_panel);
-        statistics_button_panel.setLayout(statistics_button_panelLayout);
-        statistics_button_panelLayout.setHorizontalGroup(
-            statistics_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
-            .addGroup(statistics_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(statistics_button_panelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(statistics_label)
-                    .addContainerGap(244, Short.MAX_VALUE)))
-        );
-        statistics_button_panelLayout.setVerticalGroup(
-            statistics_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(statistics_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(statistics_button_panelLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(statistics_label)
-                    .addContainerGap(13, Short.MAX_VALUE)))
+        user_management_button_panelLayout.setVerticalGroup(
+            user_management_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(user_management_button_panelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(user_management_label)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         try{
@@ -611,11 +723,10 @@ public class FairManagerScreen extends javax.swing.JFrame {
         panel_left.setLayout(panel_leftLayout);
         panel_leftLayout.setHorizontalGroup(
             panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dashboard_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-            .addComponent(sales_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-            .addComponent(inventory_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-            .addComponent(statistics_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(fair_management_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(user_management_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
             .addComponent(logo_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(store_management_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
         panel_leftLayout.setVerticalGroup(
             panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,13 +734,11 @@ public class FairManagerScreen extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dashboard_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fair_management_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sales_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(store_management_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inventory_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statistics_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(user_management_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -654,40 +763,12 @@ public class FairManagerScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void statistics_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistics_button_panelMouseClicked
+    private void user_management_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_user_management_button_panelMouseClicked
         
         //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(statistics_button_panel, current_button,statistics_label,current_label);
-        current_button = statistics_button_panel;
-        current_label = statistics_label;
-        
-        //changes the card layout to bring up the dashboard panel
-        parent_panel.removeAll();
-        parent_panel.add(fair_statistics_panel);
-        parent_panel.repaint();
-        parent_panel.revalidate();
-    }//GEN-LAST:event_statistics_button_panelMouseClicked
-
-    private void inventory_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventory_button_panelMouseClicked
-        
-        //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(inventory_button_panel, current_button,inventory_label,current_label);
-        current_button = inventory_button_panel;
-        current_label = inventory_label;
-        
-        //changes the card layout to bring up the dashboard panel
-        parent_panel.removeAll();
-        parent_panel.add(stores_panel);
-        parent_panel.repaint();
-        parent_panel.revalidate();
-    }//GEN-LAST:event_inventory_button_panelMouseClicked
-
-    private void sales_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sales_button_panelMouseClicked
-        
-        //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(sales_button_panel, current_button,sales_label,current_label);
-        current_button = sales_button_panel;
-        current_label = sales_label;
+        changeBackgroundColor(user_management_button_panel, current_button,user_management_label,current_label);
+        current_button = user_management_button_panel;
+        current_label = user_management_label;
         
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
@@ -695,22 +776,26 @@ public class FairManagerScreen extends javax.swing.JFrame {
         parent_panel.repaint();
         parent_panel.revalidate();
 
-    }//GEN-LAST:event_sales_button_panelMouseClicked
+    }//GEN-LAST:event_user_management_button_panelMouseClicked
 
-    private void dashboard_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboard_button_panelMouseClicked
+    private void fair_management_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fair_management_button_panelMouseClicked
         
         //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(dashboard_button_panel, current_button,dashboard_label,current_label);
-        current_button = dashboard_button_panel;
-        current_label = dashboard_label;
+        changeBackgroundColor(fair_management_button_panel, current_button,fair_management_label,current_label);
+        current_button = fair_management_button_panel;
+        current_label = fair_management_label;
         
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
-        parent_panel.add(dashboard_panel);
+        parent_panel.add(fair_management_panel);
         parent_panel.repaint();
         parent_panel.revalidate();
 
-    }//GEN-LAST:event_dashboard_button_panelMouseClicked
+    }//GEN-LAST:event_fair_management_button_panelMouseClicked
+
+    private void store_management_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_store_management_button_panelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_store_management_button_panelMouseClicked
 
     private void setCustomFont(JLabel label){
         
@@ -768,14 +853,15 @@ public class FairManagerScreen extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel dashboard_button_panel;
-    private javax.swing.JLabel dashboard_label;
-    private javax.swing.JPanel dashboard_panel;
-    private javax.swing.JLabel dashboard_screen_label;
+    private javax.swing.JTextField adult_entranct_fee_text_field;
+    private javax.swing.JTextField children_entrance_fee_text_field;
     private javax.swing.JPanel entrance_management_panel;
+    private javax.swing.JPanel fair_management_button_panel;
+    private javax.swing.JLabel fair_management_label;
+    private javax.swing.JPanel fair_management_panel;
+    private javax.swing.JLabel fair_management_screen_label;
     private javax.swing.JPanel fair_statistics_panel;
-    private javax.swing.JPanel inventory_button_panel;
-    private javax.swing.JLabel inventory_label;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -786,25 +872,44 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -814,12 +919,12 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
     private javax.swing.JPanel parent_panel;
-    private javax.swing.JPanel sales_button_panel;
-    private javax.swing.JLabel sales_label;
     private javax.swing.JLabel sales_screen_label;
-    private javax.swing.JPanel statistics_button_panel;
-    private javax.swing.JLabel statistics_label;
     private javax.swing.JLabel statistics_panel_label;
+    private javax.swing.JPanel store_management_button_panel;
     private javax.swing.JPanel stores_panel;
+    private javax.swing.JPanel user_management_button_panel;
+    private javax.swing.JLabel user_management_label;
+    private javax.swing.JLabel user_management_label1;
     // End of variables declaration//GEN-END:variables
 }

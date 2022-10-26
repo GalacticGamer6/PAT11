@@ -18,12 +18,14 @@ public class UserManager {
     
     private User [] user_list = new User[50];
     private int size = 0;
-    private final DB db = new DB();
     
-    public UserManager() throws SQLException{
+    private DB MyFairLadyDB;
+    
+    public UserManager() throws SQLException, ClassNotFoundException{
+        this.MyFairLadyDB = new DB();
         
         String statement = "SELECT * FROM tblusers;";
-        ResultSet rs = db.query(statement);
+        ResultSet rs = MyFairLadyDB.query(statement);
         
         while(rs.next()){
         
@@ -53,10 +55,11 @@ public class UserManager {
         return output;
     }
 
-    public void addUser(User u){
+    public void addUser(User u) throws SQLException{
         
         String statement = "INSERT INTO tblproducts(Username, Password, Account_Level,store)"
                 + "\n" + "Values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getAccount_level() + "','" + u.getStoreName() + "');";
+        MyFairLadyDB.query(statement);
     }
     
     

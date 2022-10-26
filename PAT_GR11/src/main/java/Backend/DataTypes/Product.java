@@ -13,7 +13,7 @@ public class Product {
     private  int quantity;
     private  int num_sold;
     
-    
+    //name, storename, cost, sell, quantity, numbersold
     public Product(String n, String sn, double cp, double sp, String c, int q, int ns){
         
         name = n;
