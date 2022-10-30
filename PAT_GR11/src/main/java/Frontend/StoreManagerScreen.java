@@ -1,7 +1,9 @@
 package Frontend;
 
 import Backend.DataTypes.Product;
+import Backend.DataTypes.Store;
 import Backend.ManagerClasses.ProductManager;
+import Backend.ManagerClasses.StoreManager;
 import Backend.Utility.DB;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,8 +30,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private JLabel current_label;
     private final DB db;
     public String store_name;
-    
-
+    private StoreManager sm = new StoreManager();
     
     
     public StoreManagerScreen() throws ClassNotFoundException, SQLException {
@@ -49,22 +50,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         initializeCategories(category_combo_box);
         
-        //combo box
-//        DefaultComboBoxModel cbm = new  DefaultComboBoxModel();
-//        cbm.addElement("Toys");
-//        cbm.addElement("Food");
-//        cbm.addElement("Clothes");
-//        
-//        jComboBox1.setModel(cbm);
-//        
-//        
-//        //Jlist
-//        DefaultListModel lm = new DefaultListModel();
-//        lm.addElement("John");
-//        lm.addElement("Ice Cream");
-//        lm.addElement("Chocolate");
-//        available_products_list.setModel(lm);
-//        
 //        
 //        //table
 //        String [] column_names = new String[3];
@@ -797,21 +782,24 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_button_panelMouseClicked
 
     private void add_prodcut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_prodcut_buttonActionPerformed
+
         
-        String product_name = product_name_field.getText();
-        store_name = store_name_label.getText();
-        double cost_price = Double.parseDouble(cost_price_field.getText()) * 1.0;
-        double selling_price = Double.parseDouble(selling_price_field.getText()) * 1.0;
-        double profit = selling_price - cost_price;
-        String category = (String)category_combo_box.getSelectedItem();
-        int quantity = (int)quantity_spinner.getValue();
-        
-        
-        Product p = new Product(product_name,store_name,selling_price,cost_price,profit,category,quantity,0);
-        System.out.println(p.toString());
         
         try {
-            ProductManager pm = new ProductManager(store_name);
+            String product_name = product_name_field.getText();
+            store_name = store_name_label.getText();
+            String fair_name = sm.searchStore(store_name).getFair_name();
+            double cost_price = Double.parseDouble(cost_price_field.getText()) * 1.0;
+            double selling_price = Double.parseDouble(selling_price_field.getText()) * 1.0;
+            double profit = selling_price - cost_price;
+            String category = (String)category_combo_box.getSelectedItem();
+            int quantity = (int)quantity_spinner.getValue();
+            
+            
+            Product p = new Product(product_name,store_name,fair_name,selling_price,cost_price,profit,category,quantity,0);
+            System.out.println(p.toString());
+            
+            ProductManager pm = new ProductManager();
             pm.addProduct(p);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);

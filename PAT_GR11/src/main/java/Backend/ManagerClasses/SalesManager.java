@@ -16,7 +16,7 @@ public class SalesManager {
     private ProductManager pm;
     
     public SalesManager() throws ClassNotFoundException, SQLException{
-        this.pm = new ProductManager("KFC");
+        this.pm = new ProductManager();
         this.db = new DB();
         
         String statement = "Select* FROM tblsales;";

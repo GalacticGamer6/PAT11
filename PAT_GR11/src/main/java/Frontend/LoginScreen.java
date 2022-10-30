@@ -280,6 +280,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     System.out.println("WERE IN THE FAIR OWNER IF");
                     FairManagerScreen fm = new FairManagerScreen();
                     fm.setVisible(true);
+                    fm.
                     this.dispose();
                     
                 }

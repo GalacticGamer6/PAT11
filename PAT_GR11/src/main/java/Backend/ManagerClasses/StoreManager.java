@@ -58,11 +58,28 @@ public class StoreManager {
     }
     public void deleteStore(String store_name) throws SQLException{
         
-        String statement = "DELETE FROM tblstores WHERE store name = " + "\"" + store_name + "\"" + ";";
-        System.out.println("Delete store Statement: " + statement);
-        db.update(statement);
+        //deleting the store
+        String store_statement = "DELETE FROM tblstores WHERE store_name = " + "\"" + store_name + "\"" + ";";
+        System.out.println("Delete store Statement: " + store_statement);
+        db.update(store_statement);
+        
+        //deleting the products
+        String product_statement = "DELETE FROM tblproducts WHERE store = " + "\"" + store_name + "\"" + ";";
+        db.update(product_statement);
     }
     
+    public Store searchStore(String store_name){
+        
+        int index = 0;
+        
+        for(int i = 0; i < size;i++){
+            
+            if(store_list[i].getStore_name().equals(store_name)){
+                index = i;
+            }
+        }
+        return store_list[index];
+    }
     
     public String [] getStoreNames(){
         

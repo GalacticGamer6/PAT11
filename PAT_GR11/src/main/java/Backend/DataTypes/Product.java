@@ -13,11 +13,13 @@ public class Product {
     private  int INITIAL_QUANTITY;
     private  int quantity;
     private int num_sold;
+    private String fair;
     //name, storename, cost, sell, quantity, numbersold
-    public Product(String n, String sn, double cp, double sp, double p,String c, int q, int ns){
+    public Product(String n, String sn,String f, double cp, double sp, double p,String c, int q, int ns){
         
         name = n;
         store_name = sn;
+        fair = f;
         selling_price = sp;
         cost_price = cp;
         profit = p;
@@ -31,7 +33,9 @@ public class Product {
     public String getProductName(){
         return name;
     }
-    
+    public String getFair(){
+        return fair;
+    }
     public double getCostPrice(){
         return cost_price;
     }

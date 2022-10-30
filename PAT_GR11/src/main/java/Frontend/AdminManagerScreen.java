@@ -65,20 +65,18 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         current_label = fair_management_label;
         
         //initialisizing the User Authrotiy level Combo Box
-        initialiseAcessLevelComboBox(access_level_combo_box);
         initialiseListOfFairsToRemove(list_of_fairs_to_remove);
         initialiseListOfStoresToRemove(stores_to_delete_list);
         initialiseStoreCategoryComboBox(store_category_combo_box);
         setListOfFairsModel(store_fair_combo_box);
         
-        if(access_level_combo_box.getSelectedItem().equals("StoreOwner")){
-            setListOfStoresModel(user_fairorstore_combo_box);
-        }
-        else if(access_level_combo_box.getSelectedItem().equals("FairOwner")){
-            setListOfFairsModel(user_fairorstore_combo_box);
-        }
+        DefaultListModel alm = new DefaultListModel();
+        alm.addElement("StoreOwner");
+        alm.addElement("FairOwner");
+        alm.addElement("Admin");
+        access_level_list.setModel(alm);
         
-        
+
         
         
     }
@@ -143,7 +141,8 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         users_combo_box = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         delete_user_button = new javax.swing.JButton();
-        access_level_combo_box = new javax.swing.JComboBox<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        access_level_list = new javax.swing.JList<>();
         panel_middle = new javax.swing.JPanel();
         panel_left = new javax.swing.JPanel();
         fair_management_button_panel = new javax.swing.JPanel();
@@ -292,7 +291,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(delete_fair_button)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         parent_panel.add(fair_management_panel, "card5");
@@ -431,7 +430,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
                 .addGroup(store_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(store_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(store_management_panelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -525,7 +524,17 @@ public class AdminManagerScreen extends javax.swing.JFrame{
 
         delete_user_button.setText("DELETE USER");
 
-        access_level_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        access_level_list.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        access_level_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                access_level_listMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(access_level_list);
 
         javax.swing.GroupLayout user_management_panelLayout = new javax.swing.GroupLayout(user_management_panel);
         user_management_panel.setLayout(user_management_panelLayout);
@@ -535,52 +544,58 @@ public class AdminManagerScreen extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(user_management_panelLayout.createSequentialGroup()
-                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator3)
-                            .addComponent(user_management_screen_label, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                        .addGap(631, 631, 631))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, user_management_panelLayout.createSequentialGroup()
-                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(user_management_panelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSeparator3)
+                                    .addComponent(user_management_screen_label, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                                .addGap(204, 204, 204))
+                            .addGroup(user_management_panelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(user_management_panelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(225, Short.MAX_VALUE))
+                                .addContainerGap(229, Short.MAX_VALUE))
                             .addGroup(user_management_panelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                 .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
-                                .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(user_management_panelLayout.createSequentialGroup()
-                                        .addComponent(user_password_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                        .addContainerGap(49, Short.MAX_VALUE))
-                                    .addGroup(user_management_panelLayout.createSequentialGroup()
-                                        .addComponent(user_username_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                        .addContainerGap(49, Short.MAX_VALUE))
-                                    .addGroup(user_management_panelLayout.createSequentialGroup()
-                                        .addComponent(access_level_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap())))
-                            .addGroup(user_management_panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(user_fairorstore_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(add_user_button)
+                                    .addGroup(user_management_panelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(49, 49, 49))
+                                    .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(user_management_panelLayout.createSequentialGroup()
+                                            .addComponent(user_password_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                            .addContainerGap(49, Short.MAX_VALUE))
+                                        .addGroup(user_management_panelLayout.createSequentialGroup()
+                                            .addComponent(user_username_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                            .addContainerGap(49, Short.MAX_VALUE)))))
+                            .addGroup(user_management_panelLayout.createSequentialGroup()
+                                .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel16)
                                     .addComponent(users_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(delete_user_button))
-                                .addContainerGap())))))
+                                .addContainerGap(63, Short.MAX_VALUE))))
+                    .addGroup(user_management_panelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(user_fairorstore_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(add_user_button))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         user_management_panelLayout.setVerticalGroup(
             user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(user_management_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(user_management_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -600,16 +615,16 @@ public class AdminManagerScreen extends javax.swing.JFrame{
                             .addComponent(user_password_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(user_management_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
-                            .addComponent(access_level_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(user_fairorstore_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(add_user_button)
-                        .addGap(63, 63, 63)
+                        .addGap(28, 28, 28)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
@@ -842,7 +857,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_store_management_button_panelMouseClicked
 
     private void add_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_user_buttonActionPerformed
-        User u = new User(user_username_text_field.getText(),user_password_text_field.getText(),(String)access_level_combo_box.getSelectedItem()," ");
+        User u = new User(user_username_text_field.getText(),user_password_text_field.getText(),access_level_list.getSelectedValue()," ");
         try {
             System.out.println(u.toString());
             um.addUser(u);
@@ -888,7 +903,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_delete_fair_buttonActionPerformed
 
     private void delete_store_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_store_buttonActionPerformed
-        String store_name = list_of_fairs_to_remove.getSelectedValue();
+        String store_name = stores_to_delete_list.getSelectedValue();
         try {
             sm.deleteStore(store_name);
         } catch (SQLException ex) {
@@ -911,6 +926,18 @@ public class AdminManagerScreen extends javax.swing.JFrame{
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_add_store_buttonActionPerformed
+
+    private void access_level_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_access_level_listMouseClicked
+        if(access_level_list.getSelectedValue().equals("StoreOwner")){
+            setListOfStoresModel(user_fairorstore_combo_box);
+        }
+        else if(access_level_list.getSelectedValue().equals("FairOwner")){
+            setListOfFairsModel(user_fairorstore_combo_box);
+        }
+        else{
+            
+        }
+    }//GEN-LAST:event_access_level_listMouseClicked
 
     private void initialiseAcessLevelComboBox(JComboBox b){
         
@@ -1041,7 +1068,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> access_level_combo_box;
+    private javax.swing.JList<String> access_level_list;
     private javax.swing.JButton add_fair_button;
     private javax.swing.JButton add_store_button;
     private javax.swing.JButton add_user_button;
@@ -1081,6 +1108,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
