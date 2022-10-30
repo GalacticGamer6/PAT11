@@ -32,7 +32,7 @@ public class UserManager {
             String username = rs.getString("Username");
             String password = rs.getString("Password");
             String account_level = rs.getString("Account_level");
-            String store = rs.getString("Store_Name");
+            String store = rs.getString("store_or_fair_name");
             
             user_list[size] = new User(username,password,account_level,store);
             size++;
@@ -57,7 +57,7 @@ public class UserManager {
 
     public void addUser(User u) throws SQLException{
         
-        String statement = "INSERT INTO tblusers(Username, Password, Account_Level,Store_Name)"
+        String statement = "INSERT INTO tblusers(Username, Password, Account_Level,store_or_fair_name)"
                 + "\n" + "Values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getAccount_level() + "','" + u.getStoreOrFairName() + "');";
         MyFairLadyDB.update(statement);
     }

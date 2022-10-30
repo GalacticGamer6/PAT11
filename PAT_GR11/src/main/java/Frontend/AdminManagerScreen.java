@@ -36,20 +36,6 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     public FairManager fm = new FairManager();
     public StoreManager sm = new StoreManager();
     
-    private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
-        Color off = new Color(65,67,106);
-        Color on = new Color(254,150,103);
-        Color label_off = new Color(254,150,103);
-        Color label_on = new Color(255,255,255);
-        newP.setBackground(on);
-        oldP.setBackground(off);
-        newL.setForeground(label_on);
-        oldL.setForeground(label_off);
-    }    
-    
-    
-    
-    
     
     public AdminManagerScreen() throws ClassNotFoundException, SQLException {
         this.db = new DB();
@@ -857,7 +843,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_store_management_button_panelMouseClicked
 
     private void add_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_user_buttonActionPerformed
-        User u = new User(user_username_text_field.getText(),user_password_text_field.getText(),access_level_list.getSelectedValue()," ");
+        User u = new User(user_username_text_field.getText(),user_password_text_field.getText(),access_level_list.getSelectedValue(),(String)user_fairorstore_combo_box.getSelectedItem());
         try {
             System.out.println(u.toString());
             um.addUser(u);
@@ -935,7 +921,9 @@ public class AdminManagerScreen extends javax.swing.JFrame{
             setListOfFairsModel(user_fairorstore_combo_box);
         }
         else{
-            
+            DefaultComboBoxModel cbm = new DefaultComboBoxModel();
+            cbm.addElement("");
+            user_fairorstore_combo_box.setModel(cbm);
         }
     }//GEN-LAST:event_access_level_listMouseClicked
 
@@ -950,18 +938,16 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         
     }
     
-//    private void initialiseStoreFairComboBox(JComboBox b){
-//        
-//        DefaultComboBoxModel cbm = new DefaultComboBoxModel();
-//        
-//        for(int i = 0 ; i < fm.getFairNames().length;i++){
-//            cbm.addElement(fm.getFairNames()[i]);
-//            
-//        }
-//        
-//        b.setModel(cbm);
-//        
-//    }
+    private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
+        Color off = new Color(65,67,106);
+        Color on = new Color(254,150,103);
+        Color label_off = new Color(254,150,103);
+        Color label_on = new Color(255,255,255);
+        newP.setBackground(on);
+        oldP.setBackground(off);
+        newL.setForeground(label_on);
+        oldL.setForeground(label_off);
+    }    
     
     private void initialiseListOfFairsToRemove(JList l){
         

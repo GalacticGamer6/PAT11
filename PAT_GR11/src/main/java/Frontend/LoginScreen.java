@@ -124,6 +124,11 @@ public class LoginScreen extends javax.swing.JFrame {
 
         password_field.setBackground(new java.awt.Color(246, 70, 104));
         password_field.setText("Enter a Valid Password");
+        password_field.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                password_fieldMouseClicked(evt);
+            }
+        });
         password_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 password_fieldActionPerformed(evt);
@@ -311,6 +316,10 @@ public class LoginScreen extends javax.swing.JFrame {
     private void password_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_fieldActionPerformed
         password_field.setText("");
     }//GEN-LAST:event_password_fieldActionPerformed
+
+    private void password_fieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_password_fieldMouseClicked
+        password_field.setText("");
+    }//GEN-LAST:event_password_fieldMouseClicked
 
     /**
      * @param args the command line arguments
