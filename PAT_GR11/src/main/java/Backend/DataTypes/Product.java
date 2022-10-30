@@ -6,20 +6,21 @@ public class Product {
     
     private  String name;
     private  String store_name;
-    private  double cost_price;
     private  double selling_price;
+    private  double cost_price;
+    private double profit;
     private  String category;
     private  int INITIAL_QUANTITY;
     private  int quantity;
-    private  int num_sold;
-    
+    private int num_sold;
     //name, storename, cost, sell, quantity, numbersold
-    public Product(String n, String sn, double cp, double sp, String c, int q, int ns){
+    public Product(String n, String sn, double cp, double sp, double p,String c, int q, int ns){
         
         name = n;
         store_name = sn;
-        cost_price = cp;
         selling_price = sp;
+        cost_price = cp;
+        profit = p;
         category = c;
         INITIAL_QUANTITY = q;
         quantity = q;
@@ -37,6 +38,10 @@ public class Product {
     
     public double getSellingPrice(){
         return selling_price;
+    }
+    
+    public double getProfit(){
+        return profit;
     }
     
     public String getCategory(){
@@ -59,9 +64,14 @@ public class Product {
         return num_sold;
     }
     
+    public void setQuantity(int new_quantity){
+        quantity = new_quantity;
+    }
+    
+    
     public String toString(){
         
-        return "{ " + name + " " + store_name + " " + cost_price + " " + selling_price + " " + category + " " + quantity + " " + num_sold + " }";
+        return "{ " + name + " " + store_name + " " + selling_price + " " + cost_price + " " + profit + " " +  category + " " + quantity + " "  + num_sold + " }";
         
     }
     

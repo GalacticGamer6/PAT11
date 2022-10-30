@@ -5,6 +5,8 @@
  */
 package Frontend;
 
+import Backend.DataTypes.User;
+import Backend.ManagerClasses.UserManager;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
@@ -13,9 +15,11 @@ import java.awt.GraphicsEnvironment;
 import java.awt.geom.FlatteningPathIterator;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -54,9 +58,8 @@ public class LoginScreen extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        store_enter_button = new javax.swing.JButton();
-        password_field = new javax.swing.JPasswordField();
-        fair_enter_button = new javax.swing.JButton();
+        enter_button = new javax.swing.JButton();
+        password_field = new javax.swing.JTextField();
         panel_right = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogoLabel1 = new javax.swing.JLabel();
@@ -110,30 +113,20 @@ public class LoginScreen extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(254, 150, 103));
         jSeparator2.setForeground(new java.awt.Color(254, 150, 103));
 
-        store_enter_button.setBackground(new java.awt.Color(254, 150, 103));
-        store_enter_button.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        store_enter_button.setText("ENTER STORE");
-        store_enter_button.addActionListener(new java.awt.event.ActionListener() {
+        enter_button.setBackground(new java.awt.Color(254, 150, 103));
+        enter_button.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        enter_button.setText("ENTER ");
+        enter_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                store_enter_buttonActionPerformed(evt);
+                enter_buttonActionPerformed(evt);
             }
         });
 
         password_field.setBackground(new java.awt.Color(246, 70, 104));
-        password_field.setText("***************");
-        password_field.setToolTipText("Enter A Valid Password");
-        password_field.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                password_fieldMouseClicked(evt);
-            }
-        });
-
-        fair_enter_button.setBackground(new java.awt.Color(254, 150, 103));
-        fair_enter_button.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        fair_enter_button.setText("ENTER FAIR");
-        fair_enter_button.addActionListener(new java.awt.event.ActionListener() {
+        password_field.setText("Enter a Valid Password");
+        password_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fair_enter_buttonActionPerformed(evt);
+                password_fieldActionPerformed(evt);
             }
         });
 
@@ -147,16 +140,13 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(password_field, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(username_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                         .addComponent(jSeparator1)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGroup(panel_leftLayout.createSequentialGroup()
-                        .addComponent(store_enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138)
-                        .addComponent(fair_enter_button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(305, Short.MAX_VALUE))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         panel_leftLayout.setVerticalGroup(
             panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,10 +165,8 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(store_enter_button)
-                    .addComponent(fair_enter_button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addComponent(enter_button)
                 .addGap(63, 63, 63))
         );
 
@@ -263,10 +251,6 @@ public class LoginScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void password_fieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_password_fieldMouseClicked
-        password_field.setText("");
-    }//GEN-LAST:event_password_fieldMouseClicked
-
     private void username_text_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_text_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_username_text_fieldActionPerformed
@@ -275,17 +259,57 @@ public class LoginScreen extends javax.swing.JFrame {
         username_text_field.setText("");
     }//GEN-LAST:event_username_text_fieldMouseClicked
 
-    private void store_enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_store_enter_buttonActionPerformed
-        StoreManagerScreen sm = new StoreManagerScreen();
-        sm.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_store_enter_buttonActionPerformed
+    private void enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_buttonActionPerformed
+        
+        try {
+            UserManager um = new UserManager();
+            User current_user = um.searchUser(username_text_field.getText(), password_field.getText());
+            System.out.println(current_user.toString());
+            if(current_user != null){
+                
+                String acc_level = current_user.getAccount_level();
+                if(acc_level.equals("StoreOwner")){
+                    System.out.println("WERE IN THE STORE OWNER IF");
+                    StoreManagerScreen sm = new StoreManagerScreen();
+                    sm.setVisible(true);
+                    sm.store_name_label.setText(current_user.getStoreOrFairName());
+                    this.dispose();
+                    
+                }
+                else if(acc_level.equals("FairOwner")){
+                    System.out.println("WERE IN THE FAIR OWNER IF");
+                    FairManagerScreen fm = new FairManagerScreen();
+                    fm.setVisible(true);
+                    this.dispose();
+                    
+                }
+                else if(acc_level.equals("Admin")){
+                    System.out.println("WE ARE IN THE ADMIN IF");
+                    AdminManagerScreen am = new AdminManagerScreen();
+                    am.setVisible(true);
+                    this.dispose();
+                    
+                }
+                
+            }
+            else{
+                
+                JOptionPane.showMessageDialog(rootPane, "User Does not exist, please enter a valid username and password");
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_enter_buttonActionPerformed
 
-    private void fair_enter_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fair_enter_buttonActionPerformed
-        FairManagerScreen fm = new FairManagerScreen();
-        fm.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_fair_enter_buttonActionPerformed
+    private void password_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_fieldActionPerformed
+        password_field.setText("");
+    }//GEN-LAST:event_password_fieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,7 +331,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel LogoLabel1;
-    private javax.swing.JButton fair_enter_button;
+    private javax.swing.JButton enter_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -315,9 +339,8 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_right;
-    private javax.swing.JPasswordField password_field;
+    private javax.swing.JTextField password_field;
     private javax.swing.JPanel sign_in_panel_tab;
-    private javax.swing.JButton store_enter_button;
     private javax.swing.JTextField username_text_field;
     // End of variables declaration//GEN-END:variables
 }

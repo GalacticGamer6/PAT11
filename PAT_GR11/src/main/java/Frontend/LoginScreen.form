@@ -85,19 +85,15 @@
                           <Component id="jLabel2" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
                           <Component id="LogoLabel" alignment="0" min="-2" pref="542" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="enter_button" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="password_field" alignment="0" max="32767" attributes="0"/>
                               <Component id="username_text_field" pref="243" max="32767" attributes="0"/>
                               <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
                               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="store_enter_button" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="fair_enter_button" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace pref="305" max="32767" attributes="0"/>
+                      <EmptySpace pref="336" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -118,11 +114,8 @@
                       <Component id="password_field" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="11" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="store_enter_button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fair_enter_button" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace pref="208" max="32767" attributes="0"/>
+                      <Component id="enter_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -206,7 +199,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="store_enter_button">
+            <Component class="javax.swing.JButton" name="enter_button">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="67" green="96" red="fe" type="rgb"/>
@@ -214,36 +207,21 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Gadugi" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ENTER STORE"/>
+                <Property name="text" type="java.lang.String" value="ENTER "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="store_enter_buttonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enter_buttonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="password_field">
+            <Component class="javax.swing.JTextField" name="password_field">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="46" red="f6" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="***************"/>
-                <Property name="toolTipText" type="java.lang.String" value="Enter A Valid Password"/>
+                <Property name="text" type="java.lang.String" value="Enter a Valid Password"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="password_fieldMouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="fair_enter_button">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="67" green="96" red="fe" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gadugi" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="ENTER FAIR"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fair_enter_buttonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="password_fieldActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -21,22 +21,24 @@ public class ProductManager {
     
     public ProductManager(String store_name) throws ClassNotFoundException, SQLException{
         
-//          String statement = "SELECT * FROM tblproducts;";
+//        String statement = "SELECT * FROM tblproducts;";
         String statement = "SELECT* FROM tblproducts WHERE store LIKE" + "\"" + store_name + "\"" + ";";
-       
+        System.out.println(statement);
         ResultSet products_table = MyFairLadyDB.query(statement);
         
         while(products_table.next()){
             
             String product_name = products_table.getString("product_name");
             String store_of_product = products_table.getString("store");
+            double selling_price = products_table.getDouble("selling_price");            
             double cost_price = products_table.getDouble("cost_price");
-            double selling_price = products_table.getDouble("selling_price");
+            double profit = products_table.getDouble("profit");
             String category = products_table.getString("category");
             int quantity = products_table.getInt("quantity");
             int num_sold = products_table.getInt("num_sold");
-            products_list[size] = new Product(product_name,store_of_product,cost_price,selling_price,category,quantity,num_sold);
+            products_list[size] = new Product(product_name,store_of_product,selling_price,cost_price,profit,category,quantity,num_sold);
             size++;
+            
         }
         
     }
@@ -53,10 +55,12 @@ public class ProductManager {
         return output;
     }
     
+    
     public void addProduct(Product p) throws SQLException{      
         
-        String statement =  "INSERT INTO tblproducts(product_name,store,cost_price,selling_price,category,quantity)"
-        + "\n" +  "VALUES('" + p.getProductName() + "','" + p.getStoreName() + "','" + p.getCostPrice() + "','" + p.getSellingPrice() + "','" + p.getCategory() + "','" + p.getQuantity() + "','" + p.getNumSold() + "');";
+        String statement =  "INSERT INTO tblproducts(product_name,store,selling_price,cost_price,profit,category,quantity,num_sold)"
+        + "\n" +  "VALUES('" + p.getProductName() + "','" + p.getStoreName() + "','" + p.getCostPrice() + "','" + p.getSellingPrice() + "','" + p.getProfit() + "','" + p.getCategory()  + "','" + p.getQuantity() + "','" + p.getNumSold() + "');";
+        System.out.println(statement);
         MyFairLadyDB.update(statement);
         
     }
@@ -73,7 +77,16 @@ public class ProductManager {
         return products_list[pos];
     }
     
+    public void decreaseProduct(Product p){
+        
+        int reduced_quantity = p.getQuantity() - 1;
+        p.setQuantity(reduced_quantity);
+        
+    }
     
     
+    
+    
+
     
 }

@@ -32,7 +32,7 @@ public class UserManager {
             String username = rs.getString("Username");
             String password = rs.getString("Password");
             String account_level = rs.getString("Account_level");
-            String store = rs.getString("store");
+            String store = rs.getString("Store_Name");
             
             user_list[size] = new User(username,password,account_level,store);
             size++;
@@ -57,11 +57,19 @@ public class UserManager {
 
     public void addUser(User u) throws SQLException{
         
-        String statement = "INSERT INTO tblproducts(Username, Password, Account_Level,store)"
-                + "\n" + "Values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getAccount_level() + "','" + u.getStoreName() + "');";
-        MyFairLadyDB.query(statement);
+        String statement = "INSERT INTO tblusers(Username, Password, Account_Level,Store_Name)"
+                + "\n" + "Values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getAccount_level() + "','" + u.getStoreOrFairName() + "');";
+        MyFairLadyDB.update(statement);
     }
     
-    
+    public User searchUser(String username, String password){
+        
+        for(int i = 0 ; i < size;i++){
+            
+            if(user_list[i].getUsername().equals(username) & user_list[i].getPassword().equals(password))
+            return user_list[i];
+        }
+        return null;
+    }
     
 }
