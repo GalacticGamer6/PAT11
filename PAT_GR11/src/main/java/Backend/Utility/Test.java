@@ -25,10 +25,14 @@ public class Test {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
             
-//        ProductManager pm = new ProductManager();
-//        
-//        pm.getProductsOfAStore(S)
+        ProductManager pm = new ProductManager();
         
+        Product[] output = pm.getProductsOfAStore("ShakeLand");
+        
+        for(int i = 0; i < output.length;i++){
+            
+            System.out.println(output[i]);
+        }
         
     }
 }

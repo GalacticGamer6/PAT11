@@ -67,13 +67,13 @@ public class ProductManager {
         
     }
     
-    public Product[] getProductsOfAStore(Store S){
+    public Product[] getProductsOfAStore(String store_name){
         
         Product [] output = new Product[50];
         int current_index = 0;
         
         for(int i = 0; i < size;i++){
-            if(products_list[i].getStoreName().equals(S.getStore_name())){
+            if(products_list[i].getStoreName().equals(store_name)){
                 output[current_index] = products_list[i];
                 current_index++;
             }

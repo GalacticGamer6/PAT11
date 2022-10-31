@@ -31,7 +31,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private final DB db;
     public String store_name;
     private StoreManager sm = new StoreManager();
-    
+    private ProductManager pm = new ProductManager();
     
     public StoreManagerScreen() throws ClassNotFoundException, SQLException {
         this.db = new DB();
@@ -45,10 +45,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         
         //Initialising labels and panels for the onClicked Methods
-        current_button = dashboard_button_panel;
-        current_label = dashboard_label;
-        
+        current_button = sales_button_panel;
+        current_label = sales_label;
         initializeCategories(category_combo_box);
+        
+
         
 //        
 //        //table
@@ -70,6 +71,14 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 //        
 //        
    
+        String []column_names = new String[4];
+        column_names[0] = "Product Name";
+        column_names[1] = "Selling Price";
+        column_names[2] = "Profit";
+        column_names[4] = "Category";
+        column_names[5] = "Quantity";
+        
+//        String [][] data
         
     }
 
@@ -78,10 +87,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private void initComponents() {
 
         parent_panel = new javax.swing.JPanel();
-        dashboard_panel = new javax.swing.JPanel();
-        dashboard_screen_label = new javax.swing.JLabel();
         sales_panel = new javax.swing.JPanel();
-        sales_screen_label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         available_products_list = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -89,10 +95,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jComboBox1 = new javax.swing.JComboBox<>();
         sell_products_button = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
+        sales_manager_screen_label = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         inventory_panel = new javax.swing.JPanel();
-        inventory_screen_label = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        product_list_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -109,6 +116,8 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         add_prodcut_button = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        sales_manager_screen_label1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         statistics_panel = new javax.swing.JPanel();
         statistics_panel_label = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -127,8 +136,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jTextField9 = new javax.swing.JTextField();
         panel_middle = new javax.swing.JPanel();
         panel_left = new javax.swing.JPanel();
-        dashboard_button_panel = new javax.swing.JPanel();
-        dashboard_label = new javax.swing.JLabel();
         sales_button_panel = new javax.swing.JPanel();
         sales_label = new javax.swing.JLabel();
         inventory_button_panel = new javax.swing.JPanel();
@@ -145,33 +152,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         parent_panel.setBackground(new java.awt.Color(246, 70, 104));
         parent_panel.setLayout(new java.awt.CardLayout());
 
-        dashboard_panel.setBackground(new java.awt.Color(246, 70, 104));
-
-        dashboard_screen_label.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        dashboard_screen_label.setForeground(new java.awt.Color(254, 150, 103));
-        dashboard_screen_label.setText("Dashboard");
-
-        javax.swing.GroupLayout dashboard_panelLayout = new javax.swing.GroupLayout(dashboard_panel);
-        dashboard_panel.setLayout(dashboard_panelLayout);
-        dashboard_panelLayout.setHorizontalGroup(
-            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_panelLayout.createSequentialGroup()
-                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 637, Short.MAX_VALUE))
-        );
-        dashboard_panelLayout.setVerticalGroup(
-            dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_panelLayout.createSequentialGroup()
-                .addComponent(dashboard_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 516, Short.MAX_VALUE))
-        );
-
-        parent_panel.add(dashboard_panel, "card5");
-
         sales_panel.setBackground(new java.awt.Color(246, 70, 104));
-
-        sales_screen_label.setForeground(new java.awt.Color(254, 150, 103));
-        sales_screen_label.setText("Sales");
 
         available_products_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -201,62 +182,63 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jLabel16.setForeground(new java.awt.Color(254, 150, 103));
         jLabel16.setText("CATEGORY");
 
+        sales_manager_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        sales_manager_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+        sales_manager_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sales_manager_screen_label.setText("SALES MANAGER");
+
+        jSeparator1.setForeground(new java.awt.Color(254, 150, 103));
+
         javax.swing.GroupLayout sales_panelLayout = new javax.swing.GroupLayout(sales_panel);
         sales_panel.setLayout(sales_panelLayout);
         sales_panelLayout.setHorizontalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sales_screen_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(sales_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(sell_products_button))
                     .addGroup(sales_panelLayout.createSequentialGroup()
                         .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(sell_products_button)))
-                .addContainerGap())
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
         );
         sales_panelLayout.setVerticalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_panelLayout.createSequentialGroup()
-                .addComponent(sales_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(27, 27, 27)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(sell_products_button)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         parent_panel.add(sales_panel, "card2");
 
         inventory_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        try{
-            Font font = Font.createFont(Font.TRUETYPE_FONT,
-                new File("AmbarPearlPersonalUse-0nBz.ttf"));
-            Font bold = font.deriveFont(Font.BOLD, 12);
-            Font plain = font.deriveFont(Font.PLAIN, 24);
-            inventory_screen_label.setForeground(new java.awt.Color(254, 150, 103));
-            inventory_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            inventory_screen_label.setText("Inventory");
-            inventory_screen_label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        } catch (FontFormatException | IOException e){
-            e.printStackTrace();
-        }
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        product_list_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -267,7 +249,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(product_list_table);
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 150, 103));
@@ -309,47 +291,61 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         jButton2.setText("REMOVE");
 
+        sales_manager_screen_label1.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        sales_manager_screen_label1.setForeground(new java.awt.Color(254, 150, 103));
+        sales_manager_screen_label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sales_manager_screen_label1.setText("INVENTORY MANAGER");
+
+        jSeparator2.setForeground(new java.awt.Color(254, 150, 103));
+
         javax.swing.GroupLayout inventory_panelLayout = new javax.swing.GroupLayout(inventory_panel);
         inventory_panel.setLayout(inventory_panelLayout);
         inventory_panelLayout.setHorizontalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addComponent(inventory_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 423, Short.MAX_VALUE))
-            .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(inventory_panelLayout.createSequentialGroup()
-                            .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
-                            .addGap(63, 63, 63)
-                            .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(product_name_field)
-                                .addComponent(cost_price_field)
-                                .addComponent(selling_price_field, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                .addComponent(category_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(add_prodcut_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(inventory_panelLayout.createSequentialGroup()
+                                    .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addGap(63, 63, 63)
+                                    .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(product_name_field)
+                                        .addComponent(cost_price_field)
+                                        .addComponent(selling_price_field, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(category_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(add_prodcut_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))
+                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sales_manager_screen_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addComponent(inventory_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(sales_manager_screen_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -495,7 +491,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                 .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -535,36 +531,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         );
 
         panel_left.setBackground(new java.awt.Color(152, 64, 99));
-
-        dashboard_button_panel.setBackground(new java.awt.Color(254, 150, 103));
-        dashboard_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
-        dashboard_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dashboard_button_panelMouseClicked(evt);
-            }
-        });
-
-        dashboard_label.setBackground(new java.awt.Color(254, 150, 103));
-        dashboard_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        dashboard_label.setForeground(new java.awt.Color(255, 255, 255));
-        dashboard_label.setText("DASHBOARD");
-
-        javax.swing.GroupLayout dashboard_button_panelLayout = new javax.swing.GroupLayout(dashboard_button_panel);
-        dashboard_button_panel.setLayout(dashboard_button_panelLayout);
-        dashboard_button_panelLayout.setHorizontalGroup(
-            dashboard_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboard_button_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dashboard_label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        dashboard_button_panelLayout.setVerticalGroup(
-            dashboard_button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboard_button_panelLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(dashboard_label)
-                .addGap(16, 16, 16))
-        );
 
         sales_button_panel.setBackground(new java.awt.Color(65, 67, 106));
         sales_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
@@ -689,7 +655,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         panel_left.setLayout(panel_leftLayout);
         panel_leftLayout.setHorizontalGroup(
             panel_leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dashboard_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
             .addComponent(sales_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
             .addComponent(inventory_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
             .addComponent(statistics_button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
@@ -708,15 +673,13 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             .addGroup(panel_leftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(store_name_label, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dashboard_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(sales_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inventory_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statistics_button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(62, 62, 62)
                 .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -761,6 +724,20 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         current_button = inventory_button_panel;
         current_label = inventory_label;
+        
+        store_name = store_name_label.getText();
+        DefaultListModel lm = new DefaultListModel();
+        System.out.println("STORE NAME: " + store_name);
+        Product [] store_products_array = pm.getProductsOfAStore(store_name);
+        for(int i = 0 ; i < store_products_array.length;i++){
+            if(store_products_array[i].getProductName() == null){
+                break;
+            }
+            else{
+                lm.addElement(store_products_array[i].getProductName());
+            }
+        }
+        available_products_list.setModel(lm);        
         
         parent_panel.removeAll();
         parent_panel.add(inventory_panel);
@@ -809,20 +786,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         
     }//GEN-LAST:event_add_prodcut_buttonActionPerformed
-
-    private void dashboard_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboard_button_panelMouseClicked
-
-        //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(dashboard_button_panel, current_button,dashboard_label,current_label);
-        current_button = dashboard_button_panel;
-        current_label = dashboard_label;
-
-        //changes the card layout to bring up the dashboard panel
-        parent_panel.removeAll();
-        parent_panel.add(dashboard_panel);
-        parent_panel.repaint();
-        parent_panel.revalidate();
-    }//GEN-LAST:event_dashboard_button_panelMouseClicked
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
         LoginScreen ls = new LoginScreen();
@@ -910,14 +873,9 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JButton back_button;
     private javax.swing.JComboBox<String> category_combo_box;
     private javax.swing.JTextField cost_price_field;
-    private javax.swing.JPanel dashboard_button_panel;
-    private javax.swing.JLabel dashboard_label;
-    private javax.swing.JPanel dashboard_panel;
-    private javax.swing.JLabel dashboard_screen_label;
     private javax.swing.JPanel inventory_button_panel;
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
-    private javax.swing.JLabel inventory_screen_label;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -941,7 +899,8 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
@@ -953,12 +912,14 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
     private javax.swing.JPanel parent_panel;
+    private javax.swing.JTable product_list_table;
     private javax.swing.JTextField product_name_field;
     private javax.swing.JSpinner quantity_spinner;
     private javax.swing.JPanel sales_button_panel;
     private javax.swing.JLabel sales_label;
+    private javax.swing.JLabel sales_manager_screen_label;
+    private javax.swing.JLabel sales_manager_screen_label1;
     private javax.swing.JPanel sales_panel;
-    private javax.swing.JLabel sales_screen_label;
     private javax.swing.JButton sell_products_button;
     private javax.swing.JTextField selling_price_field;
     private javax.swing.JPanel statistics_button_panel;
