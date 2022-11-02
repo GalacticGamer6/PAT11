@@ -71,12 +71,12 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 //        
 //        
    
-        String []column_names = new String[4];
+        String []column_names = new String[5];
         column_names[0] = "Product Name";
         column_names[1] = "Selling Price";
         column_names[2] = "Profit";
-        column_names[4] = "Category";
-        column_names[5] = "Quantity";
+        column_names[3] = "Category";
+        column_names[4] = "Quantity";
         
 //        String [][] data
         
@@ -224,14 +224,12 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sell_products_button)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         parent_panel.add(sales_panel, "card2");
@@ -726,18 +724,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         current_label = inventory_label;
         
         store_name = store_name_label.getText();
-        DefaultListModel lm = new DefaultListModel();
-        System.out.println("STORE NAME: " + store_name);
-        Product [] store_products_array = pm.getProductsOfAStore(store_name);
-        for(int i = 0 ; i < store_products_array.length;i++){
-            if(store_products_array[i].getProductName() == null){
-                break;
-            }
-            else{
-                lm.addElement(store_products_array[i].getProductName());
-            }
-        }
-        available_products_list.setModel(lm);        
+
         
         parent_panel.removeAll();
         parent_panel.add(inventory_panel);
@@ -748,6 +735,22 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private void sales_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sales_button_panelMouseClicked
         changeBackgroundColor(sales_button_panel, current_button,sales_label,current_label);
 
+        DefaultListModel lm = new DefaultListModel();
+        Product [] store_products_array = pm.getProductsOfAStore(store_name);
+        
+        for(int i = 0 ; i < store_products_array.length;i++){
+            if(store_products_array[i] == null){
+                break;
+            }
+            else{
+                lm.addElement(store_products_array[i].getProductName());
+            }
+        }
+        
+        
+        available_products_list.setModel(lm);          
+        
+        
         current_button = sales_button_panel;
         current_label = sales_label;
         

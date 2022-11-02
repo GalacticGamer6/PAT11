@@ -74,8 +74,10 @@ public class ProductManager {
         
         for(int i = 0; i < size;i++){
             if(products_list[i].getStoreName().equals(store_name)){
-                output[current_index] = products_list[i];
-                current_index++;
+                if(products_list[i] != null){
+                    output[current_index] = products_list[i];
+                    current_index++;
+                }
             }
         }
         return output;
