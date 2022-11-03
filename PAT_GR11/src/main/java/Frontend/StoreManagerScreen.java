@@ -812,7 +812,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         Product p = pm.getProduct(product_name);
         
         
-        pm.deleteProduct(p);
+        try {
+            pm.deleteProduct(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_remove_product_buttonActionPerformed
 
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){

@@ -1,9 +1,11 @@
 package Backend.ManagerClasses;
 
 import Backend.DataTypes.Fair;
+import Backend.DataTypes.Product;
 import Backend.Utility.DB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FairManager {
     
@@ -68,6 +70,8 @@ public class FairManager {
         String sale_statement = "DELETE FROM tblsales WHERE Fair = " + "\"" + fair_name + "\"" + ";";
     }
     
+    
+    
     public String [] getFairNames(){
         
         String output[] = new String[50];
@@ -83,6 +87,30 @@ public class FairManager {
     public int getFairNumber(){
         return size; 
     }
+    
+    public ArrayList<Product> getListOfFairs() throws SQLException{
+        
+        ArrayList<Product> fair_list = new ArrayList<Product>();
+        
+        String statement = "SELECT* FROM tblfairs;";
+        ResultSet fairs_table = db.query(statement);
+        
+        while(fairs_table.next()){
+            
+            String fair_name = fairs_table.getString("fair_name");
+            double entrance_fee = fairs_table.getDouble("entrance_fee");
+            double profit = fairs_table.getDouble("profit");
+            String fair_owner = fairs_table.getString("fair_owner");
+            
+            Fair current_fair = new Product(product_name,store_of_product,fair_of_product,selling_price,cost_price,profit,category,quantity,num_sold);
+            fair_list.add(current_fair);
+            
+            
+        }
+        
+        return store_products;
+        
+    }    
     
     
     
