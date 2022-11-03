@@ -88,9 +88,9 @@ public class FairManager {
         return size; 
     }
     
-    public ArrayList<Product> getListOfFairs() throws SQLException{
+    public ArrayList<Fair> getListOfFairs() throws SQLException{
         
-        ArrayList<Product> fair_list = new ArrayList<Product>();
+        ArrayList<Fair> fair_list = new ArrayList<Fair>();
         
         String statement = "SELECT* FROM tblfairs;";
         ResultSet fairs_table = db.query(statement);
@@ -102,13 +102,13 @@ public class FairManager {
             double profit = fairs_table.getDouble("profit");
             String fair_owner = fairs_table.getString("fair_owner");
             
-            Fair current_fair = new Product(product_name,store_of_product,fair_of_product,selling_price,cost_price,profit,category,quantity,num_sold);
+            Fair current_fair = new Fair(fair_name,entrance_fee,profit,fair_owner);
             fair_list.add(current_fair);
             
             
         }
         
-        return store_products;
+        return fair_list;
         
     }    
     

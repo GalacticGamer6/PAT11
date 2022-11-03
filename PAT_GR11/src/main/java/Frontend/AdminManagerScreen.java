@@ -970,6 +970,15 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         l.setModel(lm);
         
     }
+    
+    private void initialiseListOfFairsTable(Table t){
+        
+        
+        
+        
+        
+        
+    }
 
     private void initialiseStoreCategoryComboBox(JComboBox box){
         
