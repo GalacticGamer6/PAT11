@@ -1,9 +1,11 @@
 package Backend.ManagerClasses;
 
+import Backend.DataTypes.Fair;
 import Backend.DataTypes.Store;
 import Backend.Utility.DB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StoreManager {
 
@@ -91,6 +93,32 @@ public class StoreManager {
             
         }
         return output;
+    }  
+    
+    public ArrayList<Store> getListOfStores() throws SQLException{
+        
+        ArrayList<Store> store_list = new ArrayList<Store>();
+        
+        String statement = "SELECT* FROM tblstores;";
+        ResultSet stores_table = db.query(statement);
+        
+        while(stores_table.next()){
+            
+            String store_name = stores_table.getString("store_name");
+            double profit = stores_table.getDouble("profit");
+            int customers_served = stores_table.getInt("customers_served");
+            String category = stores_table.getString("Category");
+            String fair = stores_table.getString("Fair");
+            String owner = stores_table.getString("owner_username");
+            
+            Store current_store = new Store(store_name,profit,customers_served,category,fair,owner);
+            store_list.add(current_store);
+            
+            
+        }
+        
+        return store_list;
+        
     }    
     
 }

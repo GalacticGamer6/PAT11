@@ -5,10 +5,12 @@
  */
 package Backend.ManagerClasses;
 
+import Backend.DataTypes.Store;
 import Backend.DataTypes.User;
 import Backend.Utility.DB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -72,5 +74,29 @@ public class UserManager {
         }
         return null;
     }
+    
+    public ArrayList<User> getListOfUsers() throws SQLException{
+        
+        ArrayList<User> user_list = new ArrayList<User>();
+        
+        String statement = "SELECT* FROM tblusers;";
+        ResultSet users_table = MyFairLadyDB.query(statement);
+        
+        while(users_table.next()){
+            
+            String username = users_table.getString("Username");
+            String Password = users_table.getString("Password");
+            String account_lvl = users_table.getString("Account_Level");
+            String store_or_fair_name = users_table.getString("store_or_fair_name");
+            
+            User current_user = new User(username,Password,account_lvl,store_or_fair_name);
+            user_list.add(current_user);
+            
+            
+        }
+        
+        return user_list;
+        
+    }    
     
 }

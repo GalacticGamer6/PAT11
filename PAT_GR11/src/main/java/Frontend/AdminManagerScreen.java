@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.DataTypes.Fair;
+import Backend.DataTypes.Product;
 import Backend.DataTypes.Store;
 import Backend.DataTypes.User;
 import Backend.ManagerClasses.FairManager;
@@ -15,6 +16,7 @@ import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -54,6 +56,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         initialiseListOfFairsToRemove(list_of_fairs_to_remove);
         initialiseListOfStoresToRemove(stores_to_delete_list);
         initialiseStoreCategoryComboBox(store_category_combo_box);
+        initializeFairsListTable(list_of_fairs_table);
         setListOfFairsModel(store_fair_combo_box);
         
         DefaultListModel alm = new DefaultListModel();
@@ -93,7 +96,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         store_management_screen_label = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        list_of_stores = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -291,7 +294,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
 
         jSeparator2.setForeground(new java.awt.Color(254, 150, 103));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        list_of_stores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -302,7 +305,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
                 "Store Name", "Category", "No. Customers", "Profit", "Owner", "Fair"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(list_of_stores);
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 150, 103));
@@ -804,7 +807,11 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         changeBackgroundColor(user_management_button_panel, current_button,user_management_label,current_label);
         current_button = user_management_button_panel;
         current_label = user_management_label;
-        
+        try {
+            initializeUsersTable(users_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
         parent_panel.add(user_management_panel);
@@ -814,7 +821,11 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_user_management_button_panelMouseClicked
 
     private void fair_management_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fair_management_button_panelMouseClicked
-        
+        try {
+            initializeFairsListTable(list_of_fairs_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //changes colour of panels and labels to show a tab is selected
         changeBackgroundColor(fair_management_button_panel, current_button,fair_management_label,current_label);
         current_button = fair_management_button_panel;
@@ -833,7 +844,11 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         changeBackgroundColor(store_management_button_panel, current_button,store_management_label,current_label);
         current_button = store_management_button_panel;
         current_label = store_management_label;
-        
+        try {
+            initializeStoresListTable(list_of_stores);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
         parent_panel.add(store_management_panel);
@@ -847,6 +862,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         try {
             System.out.println(u.toString());
             um.addUser(u);
+            initializeUsersTable(users_table);
             
             
         } catch (SQLException ex) {
@@ -873,6 +889,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         
         try {
             fm.addFair(f);
+            initializeFairsListTable(list_of_fairs_table);
         } catch (SQLException ex) {
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -883,6 +900,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         String fair_name = list_of_fairs_to_remove.getSelectedValue();
         try {
             fm.deleteFair(fair_name);
+            initializeFairsListTable(list_of_fairs_table);
         } catch (SQLException ex) {
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -892,6 +910,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         String store_name = stores_to_delete_list.getSelectedValue();
         try {
             sm.deleteStore(store_name);
+            initializeStoresListTable(list_of_stores);
         } catch (SQLException ex) {
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -908,6 +927,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         Store s = new Store(store_name,profit,num_customers,category,fair,owner_username);
         try {
             sm.addStore(s);
+            initializeStoresListTable(list_of_stores);
         } catch (SQLException ex) {
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -971,14 +991,77 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         
     }
     
-    private void initialiseListOfFairsTable(Table t){
+    public void initializeFairsListTable(JTable table) throws SQLException{
         
         
+        ArrayList<Fair> arr = fm.getListOfFairs();
+        String [] column_names = {"Fair Name", "Entrance Fee","Profit","Fair Owner"};
         
+        String [][] data = new String[100][4];
         
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getFair_name();
+            data[row_number][1] = Double.toString(arr.get(row_number).getEntry_fee());
+            data[row_number][2] = Double.toString(arr.get(row_number).getOverall_profit());
+            data[row_number][3] = arr.get(row_number).getFair_owner();
+            
+        }
         
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        table.setModel(tm);
         
     }
+    
+    public void initializeStoresListTable(JTable table) throws SQLException{
+        
+        
+        ArrayList<Store> arr = sm.getListOfStores();
+        String [] column_names = {"Store Name", "Profit","Customers Served","Category","Fair","Owner Username"};
+        
+        String [][] data = new String[100][6];
+        
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getStore_name();
+            data[row_number][1] = Double.toString(arr.get(row_number).getProfit());
+            data[row_number][2] = Integer.toString(arr.get(row_number).getCustomersServed());
+            data[row_number][3] = arr.get(row_number).getCategory();
+            data[row_number][4] = arr.get(row_number).getFair_name();
+            data[row_number][5] = arr.get(row_number).getOwner_name();
+            
+            
+        }
+        
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        table.setModel(tm);
+        
+    }
+
+    public void initializeUsersTable(JTable table) throws SQLException{
+        
+        
+        ArrayList<User> arr = um.getListOfUsers();
+        String [] column_names = {"Username", "Password","Account Level","Store/Fair Name"};
+        
+        String [][] data = new String[100][4];
+        
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getUsername();
+            data[row_number][1] = arr.get(row_number).getPassword();
+            data[row_number][2] = arr.get(row_number).getAccount_level();
+            data[row_number][3] = arr.get(row_number).getStoreOrFairName();
+            
+            
+        }
+        
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        table.setModel(tm);
+        
+    }    
+    
+    
 
     private void initialiseStoreCategoryComboBox(JComboBox box){
         
@@ -1107,9 +1190,9 @@ public class AdminManagerScreen extends javax.swing.JFrame{
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable list_of_fairs_table;
     private javax.swing.JList<String> list_of_fairs_to_remove;
+    private javax.swing.JTable list_of_stores;
     private javax.swing.JLabel logo_label;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
