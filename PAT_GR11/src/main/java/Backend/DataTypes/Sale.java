@@ -16,13 +16,15 @@ public class Sale {
     
     private Product product_sold;
     private String store_name;
+    private String fair_name;
     private LocalDate date_of_sale;
     
     
-    public Sale(Product p, String sn, LocalDate d){
+    public Sale(Product p, String sn,String fn, LocalDate d){
    
         product_sold = p;
         store_name = sn;
+        fair_name = fn;
         date_of_sale = d;
         
     }
@@ -33,6 +35,10 @@ public class Sale {
 
     public String getStore_name() {
         return store_name;
+    }
+    
+    public String getFair_name(){
+        return fair_name;
     }
 
     public LocalDate getDate_of_sale() {

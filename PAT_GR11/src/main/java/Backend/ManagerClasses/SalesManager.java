@@ -4,6 +4,7 @@ package Backend.ManagerClasses;
 import Backend.DataTypes.Product;
 import Backend.DataTypes.Sale;
 import Backend.Utility.DB;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -26,9 +27,10 @@ public class SalesManager {
             
             Product product = pm.getProduct((sales_table.getString("product_name")));
             String store_name = sales_table.getString("Store");
+            String fair_name = sales_table.getString("Fair");
             LocalDate date = sales_table.getDate("Date").toLocalDate();
         
-            Sale current_sale = new Sale(product, store_name, date);
+            Sale current_sale = new Sale(product, store_name,fair_name, date);
             list_of_sales[size] = current_sale;
             size++;
             
@@ -58,5 +60,21 @@ public class SalesManager {
         
     }
     
+//    public Sale getSalesByStore(String store_name) throws SQLException{
+//        
+//        
+//        String statement = "SELECT FROM tblsales WHERE STORE =" + store_name + ";";
+//        ResultSet rs = db.query(statement);
+//        
+//        
+//        while(rs.next()){
+//        
+//            String p = rs.getString("product_name");
+//            String s = rs.getString("Store");
+//            String f = rs.getString("Fair");
+//            LocalDate date = rs.getDate("Date").toLocalDate();
+//            
+//        }
+//    }
     
 }

@@ -288,7 +288,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     System.out.println("WERE IN THE FAIR OWNER IF");
                     FairManagerScreen fm = new FairManagerScreen();
                     fm.setVisible(true);
-                    fm.fair_name_label.setText(current_user.getStoreOrFairName());
+//                    fm.fair_name_label.setText(current_user.getStoreOrFairName());
                     this.dispose();
                     
                 }

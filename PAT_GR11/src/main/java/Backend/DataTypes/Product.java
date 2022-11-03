@@ -15,7 +15,7 @@ public class Product {
     private int num_sold;
     private String fair;
     //name, storename, cost, sell, quantity, numbersold
-    public Product(String n, String sn,String f, double cp, double sp, double p,String c, int q, int ns){
+    public Product(String n, String sn,String f, double sp, double cp, double p,String c, int q, int ns){
         
         name = n;
         store_name = sn;

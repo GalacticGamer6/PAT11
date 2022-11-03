@@ -16,6 +16,7 @@ import Backend.ManagerClasses.StoreManager;
 import Backend.ManagerClasses.UserManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,7 +28,14 @@ public class Test {
             
         ProductManager pm = new ProductManager();
         
-        pm.getProductsOfAStore("H")
+        
+        
+        ArrayList<Product> arr = pm.getProductsOfAStore("HawtDamnDiggidyDog");
+        
+        for(int i = 0 ; i < arr.size() ; i++){
+            
+            System.out.println(arr.get(i).getProductName());
+        }
         
     }
 }

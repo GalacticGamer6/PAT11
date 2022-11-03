@@ -13,6 +13,7 @@ import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -22,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class StoreManagerScreen extends javax.swing.JFrame{
@@ -49,7 +51,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         current_button = sales_button_panel;
         current_label = sales_label;
         initializeCategories(category_combo_box);
-        
+        initializeAvailableProductsList(available_products_list);
 
         
 //        
@@ -116,7 +118,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jLabel8 = new javax.swing.JLabel();
         add_prodcut_button = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        remove_product_button = new javax.swing.JButton();
         sales_manager_screen_label1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         statistics_panel = new javax.swing.JPanel();
@@ -160,7 +162,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        getAvaiableProductsToSell(available_products_list);
         jScrollPane1.setViewportView(available_products_list);
 
         list_of_sales.setModel(new javax.swing.table.DefaultTableModel(
@@ -238,6 +239,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         inventory_panel.setBackground(new java.awt.Color(246, 70, 104));
 
+        product_list_table.setForeground(new java.awt.Color(254, 150, 103));
         product_list_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -289,7 +291,12 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton2.setText("REMOVE");
+        remove_product_button.setText("REMOVE");
+        remove_product_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remove_product_buttonActionPerformed(evt);
+            }
+        });
 
         sales_manager_screen_label1.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         sales_manager_screen_label1.setForeground(new java.awt.Color(254, 150, 103));
@@ -330,7 +337,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(add_prodcut_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(remove_product_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35))
                     .addGroup(inventory_panelLayout.createSequentialGroup()
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -380,7 +387,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(remove_product_button, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
 
@@ -726,7 +733,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         current_label = inventory_label;
         
         store_name = store_name_label.getText();
-
+        try {
+            initializeProductsListTable(product_list_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         parent_panel.removeAll();
         parent_panel.add(inventory_panel);
@@ -739,7 +750,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         DefaultListModel lm = new DefaultListModel();
 
-        getAvaiableProductsToSell(available_products_list);
+        try {
+            initializeAvailableProductsList(available_products_list);
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
           
         
         
@@ -789,6 +804,17 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         this.dispose();
     }//GEN-LAST:event_back_buttonActionPerformed
 
+    private void remove_product_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_product_buttonActionPerformed
+        
+        int col = 0;
+        int row = product_list_table.getSelectedRow();
+        String product_name = (String)product_list_table.getModel().getValueAt(row, col);
+        Product p = pm.getProduct(product_name);
+        
+        
+        pm.deleteProduct(p);
+    }//GEN-LAST:event_remove_product_buttonActionPerformed
+
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
         Color on = new Color(254,150,103);
@@ -830,17 +856,40 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
     }
     
-    public void getAvaiableProductsToSell(JList list){
-        Store current_store = getCurrentStore(store_name_label.getText());
+    public void initializeAvailableProductsList(JList list) throws SQLException{
         
+        String store_name = store_name_label.getText();
         DefaultListModel lm = new DefaultListModel();
-        Product [] arr = pm.getProductsOfAStore(current_store.getStore_name());
+        ArrayList<Product> arr = pm.getProductsOfAStore(store_name);
         
-        for(int i = 0 ; i < arr.length;i++){
-            lm.addElement(arr[i].getProductName());
+        for(int i = 0; i < arr.size() ; i++){
+            lm.addElement(arr.get(i).getProductName());
         }
         
         list.setModel(lm);
+    }
+    
+    public void initializeProductsListTable(JTable table) throws SQLException{
+        
+        String store_name = store_name_label.getText();
+        
+        ArrayList<Product> arr = pm.getProductsOfAStore(store_name);
+        String [] column_names = {"Product Name", "Selling Price","Category","Quantity"};
+        
+        String [][] data = new String[100][4];
+        
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getProductName();
+            data[row_number][1] = Double.toString((arr.get(row_number).getSellingPrice()));
+            data[row_number][2] = arr.get(row_number).getCategory();
+            data[row_number][3] = Integer.toString(arr.get(row_number).getQuantity());
+            
+        }
+        
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        table.setModel(tm);
+        
     }
     
 
@@ -890,7 +939,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JPanel inventory_button_panel;
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -929,6 +977,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JTable product_list_table;
     private javax.swing.JTextField product_name_field;
     private javax.swing.JSpinner quantity_spinner;
+    private javax.swing.JButton remove_product_button;
     private javax.swing.JPanel sales_button_panel;
     private javax.swing.JLabel sales_label;
     private javax.swing.JLabel sales_manager_screen_label;

@@ -64,6 +64,8 @@ public class FairManager {
         String product_statement = "DELETE FROM tblproducts WHERE fair = " + "\"" + fair_name + "\"" + ";";
         db.update(product_statement);
         
+        //delete all sales from store
+        String sale_statement = "DELETE FROM tblsales WHERE Fair = " + "\"" + fair_name + "\"" + ";";
     }
     
     public String [] getFairNames(){
