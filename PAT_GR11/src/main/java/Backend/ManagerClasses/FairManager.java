@@ -2,6 +2,7 @@ package Backend.ManagerClasses;
 
 import Backend.DataTypes.Fair;
 import Backend.DataTypes.Product;
+import Backend.DataTypes.Store;
 import Backend.Utility.DB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,6 +88,19 @@ public class FairManager {
     public int getFairNumber(){
         return size; 
     }
+    
+    public Fair searchStore(String fair_name){
+        
+        int index = 0;
+        
+        for(int i = 0; i < size;i++){
+            
+            if(fair_list[i].getFair_name().equals(fair_name)){
+                index = i;
+            }
+        }
+        return fair_list[index];
+    }    
     
     public ArrayList<Fair> getListOfFairs() throws SQLException{
         

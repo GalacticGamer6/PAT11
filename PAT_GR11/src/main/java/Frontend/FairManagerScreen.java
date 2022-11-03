@@ -1,5 +1,10 @@
 package Frontend;
 
+import Backend.DataTypes.Fair;
+import Backend.DataTypes.Store;
+import Backend.ManagerClasses.FairManager;
+import Backend.ManagerClasses.StoreManager;
+import Backend.Utility.DB;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -7,6 +12,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -14,13 +21,17 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class FairManagerScreen extends javax.swing.JFrame {
 
     private JPanel current_button;
     private JLabel current_label;
-
+    
+    private StoreManager sm;
+    private FairManager fm;
+    
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
         Color on = new Color(254,150,103);
@@ -37,7 +48,10 @@ public class FairManagerScreen extends javax.swing.JFrame {
     
     
     
-    public FairManagerScreen() {
+    public FairManagerScreen() throws ClassNotFoundException, SQLException{
+        
+        this.sm = new StoreManager();
+        this.fm = new FairManager();
         
         initComponents();
         //setting up titles and Images 
@@ -74,7 +88,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         stores_panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        stores_of_fair_table = new javax.swing.JTable();
         user_management_screen_label1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         fair_statistics_panel = new javax.swing.JPanel();
@@ -194,7 +208,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
 
         stores_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        stores_of_fair_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -205,7 +219,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
                 "Name", "Products", "Total Cost", "Income", "Profit", "Number of Customers", "Category"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(stores_of_fair_table);
 
         user_management_screen_label1.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         user_management_screen_label1.setForeground(new java.awt.Color(254, 150, 103));
@@ -582,7 +596,11 @@ public class FairManagerScreen extends javax.swing.JFrame {
         changeBackgroundColor(stores_button_panel, current_button,stores_label,current_label);
         current_button = stores_button_panel;
         current_label = stores_label;
-        
+        try {
+            initialiseStoresOfFairTable(stores_of_fair_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
         parent_panel.add(stores_panel);
@@ -615,6 +633,10 @@ public class FairManagerScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tickets_sold_fieldActionPerformed
 
+    private Fair getCurrentFair(String fair_name){
+        return fm.searchStore(fair_name);
+    }
+    
     private void setCustomFont(JLabel label){
         
     try {
@@ -632,7 +654,30 @@ public class FairManagerScreen extends javax.swing.JFrame {
         
     }
     
-
+    public void initialiseStoresOfFairTable(JTable t) throws SQLException{
+        
+        String fair_name = fair_name_label.getText();
+        ArrayList<Store> arr = sm.getListOfStoresByFair(fair_name);
+        String [] column_names = {"Store Name", "Profit","Customers Served","Category","Fair","Owner Username"};
+        
+        String [][] data = new String[100][6];
+        
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getStore_name();
+            data[row_number][1] = Double.toString(arr.get(row_number).getProfit());
+            data[row_number][2] = Integer.toString(arr.get(row_number).getCustomersServed());
+            data[row_number][3] = arr.get(row_number).getCategory();
+            data[row_number][4] = arr.get(row_number).getFair_name();
+            data[row_number][5] = arr.get(row_number).getOwner_name();
+            
+            
+        }
+        
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        t.setModel(tm);
+        
+    }
     
     
     /**
@@ -675,7 +720,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JPanel entrance_button_panel;
     private javax.swing.JLabel entrance_management_label;
     private javax.swing.JPanel entrance_management_panel;
-    private javax.swing.JLabel fair_name_label;
+    public javax.swing.JLabel fair_name_label;
     private javax.swing.JPanel fair_statistics_button_panel;
     private javax.swing.JLabel fair_statistics_label;
     private javax.swing.JPanel fair_statistics_panel;
@@ -694,7 +739,6 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField least_popular_product_field;
     private javax.swing.JTextField least_popular_store_field;
     private javax.swing.JTextField most_popular_product_field;
@@ -707,6 +751,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JButton sell_tickets_button;
     private javax.swing.JPanel stores_button_panel;
     private javax.swing.JLabel stores_label;
+    private javax.swing.JTable stores_of_fair_table;
     private javax.swing.JPanel stores_panel;
     private javax.swing.JTextField ticket_total_price_field;
     private javax.swing.JTextField tickets_sold_field;
