@@ -33,6 +33,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private StoreManager sm = new StoreManager();
     private ProductManager pm = new ProductManager();
     
+            
     public StoreManagerScreen() throws ClassNotFoundException, SQLException {
         this.db = new DB();
         
@@ -159,6 +160,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        getAvaiableProductsToSell(available_products_list);
         jScrollPane1.setViewportView(available_products_list);
 
         list_of_sales.setModel(new javax.swing.table.DefaultTableModel(
@@ -530,7 +532,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         panel_left.setBackground(new java.awt.Color(152, 64, 99));
 
-        sales_button_panel.setBackground(new java.awt.Color(65, 67, 106));
+        sales_button_panel.setBackground(new java.awt.Color(254, 150, 103));
         sales_button_panel.setPreferredSize(new java.awt.Dimension(100, 50));
         sales_button_panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -539,7 +541,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         });
 
         sales_label.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        sales_label.setForeground(new java.awt.Color(254, 150, 103));
+        sales_label.setForeground(new java.awt.Color(255, 255, 255));
         sales_label.setText("SALES");
 
         javax.swing.GroupLayout sales_button_panelLayout = new javax.swing.GroupLayout(sales_button_panel);
@@ -736,19 +738,9 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         changeBackgroundColor(sales_button_panel, current_button,sales_label,current_label);
 
         DefaultListModel lm = new DefaultListModel();
-        Product [] store_products_array = pm.getProductsOfAStore(store_name);
-        
-        for(int i = 0 ; i < store_products_array.length;i++){
-            if(store_products_array[i] == null){
-                break;
-            }
-            else{
-                lm.addElement(store_products_array[i].getProductName());
-            }
-        }
-        
-        
-        available_products_list.setModel(lm);          
+
+        getAvaiableProductsToSell(available_products_list);
+          
         
         
         current_button = sales_button_panel;
@@ -767,7 +759,8 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         try {
             String product_name = product_name_field.getText();
-            store_name = store_name_label.getText();
+            String store_name = getCurrentStore(store_name_label.getText()).getStore_name();
+            System.out.println("STORE NAME FROM ADD PRODUCT METHOD: " + store_name);
             String fair_name = sm.searchStore(store_name).getFair_name();
             double cost_price = Double.parseDouble(cost_price_field.getText()) * 1.0;
             double selling_price = Double.parseDouble(selling_price_field.getText()) * 1.0;
@@ -830,6 +823,24 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         
         box.setModel(m);
         
+    }
+    //well take in the Store_name_label as text
+    public Store getCurrentStore(String store_name){
+        return sm.searchStore(store_name);
+        
+    }
+    
+    public void getAvaiableProductsToSell(JList list){
+        Store current_store = getCurrentStore(store_name_label.getText());
+        
+        DefaultListModel lm = new DefaultListModel();
+        Product [] arr = pm.getProductsOfAStore(current_store.getStore_name());
+        
+        for(int i = 0 ; i < arr.length;i++){
+            lm.addElement(arr[i].getProductName());
+        }
+        
+        list.setModel(lm);
     }
     
 

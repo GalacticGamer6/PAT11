@@ -27,12 +27,7 @@ public class Test {
             
         ProductManager pm = new ProductManager();
         
-        Product[] output = pm.getProductsOfAStore("ShakeLand");
-        
-        for(int i = 0; i < output.length;i++){
-            
-            System.out.println(output[i]);
-        }
+        pm.getProductsOfAStore("H")
         
     }
 }

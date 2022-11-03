@@ -276,7 +276,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 if(acc_level.equals("StoreOwner")){
                     System.out.println("WERE IN THE STORE OWNER IF");
                     StoreManagerScreen sm = new StoreManagerScreen();
-                    sm.store_name = current_user.getStoreOrFairName();
+                    sm.store_name_label.setText(current_user.getStoreOrFairName());
                     System.out.println("FROM LOGIN SCREEN: ");
                     System.out.println("STORE NAME: " + current_user.getStoreOrFairName());
                     sm.setVisible(true);
