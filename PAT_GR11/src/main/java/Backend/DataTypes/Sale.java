@@ -18,14 +18,16 @@ public class Sale {
     private String store_name;
     private String fair_name;
     private LocalDate date_of_sale;
+    private double profit;
     
     
-    public Sale(Product p, String sn,String fn, LocalDate d){
+    public Sale(Product p, String sn,String fn, LocalDate d,double pr){
    
         product_sold = p;
         store_name = sn;
         fair_name = fn;
         date_of_sale = d;
+        profit = pr;
         
     }
 
@@ -43,6 +45,9 @@ public class Sale {
 
     public LocalDate getDate_of_sale() {
         return date_of_sale;
+    }
+    public double getProfit(){
+        return profit;
     }
     
     public String toString(){

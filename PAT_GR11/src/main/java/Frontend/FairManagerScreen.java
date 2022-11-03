@@ -1,8 +1,11 @@
 package Frontend;
 
 import Backend.DataTypes.Fair;
+import Backend.DataTypes.Product;
+import Backend.DataTypes.Sale;
 import Backend.DataTypes.Store;
 import Backend.ManagerClasses.FairManager;
+import Backend.ManagerClasses.SalesManager;
 import Backend.ManagerClasses.StoreManager;
 import Backend.Utility.DB;
 import java.awt.Color;
@@ -13,6 +16,7 @@ import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +35,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     
     private StoreManager sm;
     private FairManager fm;
+    private SalesManager sales_manager;
     
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
@@ -50,6 +55,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     
     public FairManagerScreen() throws ClassNotFoundException, SQLException{
         
+        this.sales_manager = new SalesManager();
         this.sm = new StoreManager();
         this.fm = new FairManager();
         
@@ -62,7 +68,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
         
         current_button = entrance_button_panel;
         current_label = entrance_management_label;
-           
+        initialiseTicketSalesTable(Ticket_sales_table);
         
     }
 
@@ -83,7 +89,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
         sell_tickets_button = new javax.swing.JButton();
         ticket_total_price_field = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Ticket_sales_table = new javax.swing.JTable();
         user_management_screen_label = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         stores_panel = new javax.swing.JPanel();
@@ -128,6 +134,17 @@ public class FairManagerScreen extends javax.swing.JFrame {
 
         entrance_management_panel.setBackground(new java.awt.Color(246, 70, 104));
 
+        num_people_spinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                num_people_spinnerStateChanged(evt);
+            }
+        });
+        num_people_spinner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                num_people_spinnerMouseClicked(evt);
+            }
+        });
+
         jLabel20.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(254, 150, 103));
         jLabel20.setText("Total:");
@@ -137,8 +154,13 @@ public class FairManagerScreen extends javax.swing.JFrame {
         jLabel21.setText("People:");
 
         sell_tickets_button.setText("SELL TICKETS");
+        sell_tickets_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sell_tickets_buttonActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Ticket_sales_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -149,7 +171,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
                 "Day", "Tickets Sold", "Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Ticket_sales_table);
 
         user_management_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         user_management_screen_label.setForeground(new java.awt.Color(254, 150, 103));
@@ -614,7 +636,11 @@ public class FairManagerScreen extends javax.swing.JFrame {
         changeBackgroundColor(entrance_button_panel, current_button,entrance_management_label,current_label);
         current_button = entrance_button_panel;
         current_label = entrance_management_label;
-        
+        try {
+            initialiseTicketSalesTable(Ticket_sales_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //changes the card layout to bring up the dashboard panel
         parent_panel.removeAll();
         parent_panel.add(entrance_management_panel);
@@ -632,6 +658,42 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private void tickets_sold_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tickets_sold_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tickets_sold_fieldActionPerformed
+
+    private void num_people_spinnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_num_people_spinnerMouseClicked
+        int num_people = (int)num_people_spinner.getValue();
+        double entrance_cost = getCurrentFair(fair_name_label.getText()).getEntry_fee();
+        double total = num_people * entrance_cost;
+        ticket_total_price_field.setText("" + total);
+    }//GEN-LAST:event_num_people_spinnerMouseClicked
+
+    private void num_people_spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_num_people_spinnerStateChanged
+        int num_people = (int)num_people_spinner.getValue();
+        double entrance_cost = getCurrentFair(fair_name_label.getText()).getEntry_fee();
+        double total = num_people * entrance_cost;
+        ticket_total_price_field.setText("" + total);
+    }//GEN-LAST:event_num_people_spinnerStateChanged
+
+    private void sell_tickets_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_tickets_buttonActionPerformed
+        String product_name = "Ticket";
+        String store = "";
+        String Fair = fair_name_label.getText();
+        double selling_price = getCurrentFair(fair_name_label.getText()).getEntry_fee();
+        double cost_price = 0;
+        double profit = selling_price - cost_price;
+        String category = "";
+        int quantity = 0;
+        int num_sold = (int)num_people_spinner.getValue();
+        
+        Product ticket = new Product(product_name,store,Fair,selling_price,cost_price,profit,category,quantity,num_sold);
+        LocalDate date = LocalDate.now();
+        
+        Sale s = new Sale(ticket,store,Fair,date,profit);
+        try {
+            sales_manager.addSale(s);
+        } catch (SQLException ex) {
+            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sell_tickets_buttonActionPerformed
 
     private Fair getCurrentFair(String fair_name){
         return fm.searchStore(fair_name);
@@ -657,7 +719,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
     public void initialiseStoresOfFairTable(JTable t) throws SQLException{
         
         String fair_name = fair_name_label.getText();
-        ArrayList<Store> arr = sm.getListOfStoresByFair(fair_name);
+        ArrayList<Store> arr = sm.getListOfStoresByFair(fair_name_label.getText());
         String [] column_names = {"Store Name", "Profit","Customers Served","Category","Fair","Owner Username"};
         
         String [][] data = new String[100][6];
@@ -676,6 +738,33 @@ public class FairManagerScreen extends javax.swing.JFrame {
         
         DefaultTableModel tm = new DefaultTableModel(data,column_names);
         t.setModel(tm);
+        
+    }
+    
+    public void initialiseTicketSalesTable(JTable t) throws SQLException{
+        
+        
+        String fair_name = fair_name_label.getText();
+        ArrayList<Sale> arr = sales_manager.getListOfTicketsByFair(fair_name_label.getText());
+        
+        
+        String [] column_names = {"Item","Fair","Date","Proft"};
+        
+        String [][] data = new String[100][4];
+        
+        for(int row_number = 0; row_number < arr.size() ; row_number++){
+            
+            data[row_number][0] = arr.get(row_number).getProduct_sold().getProductName();
+            data[row_number][1] = arr.get(row_number).getFair_name();
+            data[row_number][2] = arr.get(row_number).getDate_of_sale().toString();
+            data[row_number][3] = Double.toString(arr.get(row_number).getProfit());
+            
+            
+        }
+        
+        DefaultTableModel tm = new DefaultTableModel(data,column_names);
+        t.setModel(tm);
+        
         
     }
     
@@ -716,6 +805,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Ticket_sales_table;
     private javax.swing.JButton back_button;
     private javax.swing.JPanel entrance_button_panel;
     private javax.swing.JLabel entrance_management_label;
@@ -738,7 +828,6 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField least_popular_product_field;
     private javax.swing.JTextField least_popular_store_field;
     private javax.swing.JTextField most_popular_product_field;

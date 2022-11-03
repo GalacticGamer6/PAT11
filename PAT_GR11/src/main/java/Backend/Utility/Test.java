@@ -25,17 +25,20 @@ import java.util.ArrayList;
 public class Test {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-            
-        ProductManager pm = new ProductManager();
+  
+            LocalDate date = LocalDate.now();
+            System.out.println(date.toString());
         
-        
-        
-        ArrayList<Product> arr = pm.getProductsOfAStore("HawtDamnDiggidyDog");
-        
-        for(int i = 0 ; i < arr.size() ; i++){
-            
-            System.out.println(arr.get(i).getProductName());
-        }
+//        ProductManager pm = new ProductManager();
+//        
+//        
+//        
+//        ArrayList<Product> arr = pm.getProductsOfAStore("HawtDamnDiggidyDog");
+//        
+//        for(int i = 0 ; i < arr.size() ; i++){
+//            
+//            System.out.println(arr.get(i).getProductName());
+//        }
         
     }
 }
