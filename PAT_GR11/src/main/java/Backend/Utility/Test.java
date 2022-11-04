@@ -42,8 +42,9 @@ public class Test {
         
         ProductManager pm = new ProductManager();
         StoreManager sm = new StoreManager();
-        System.out.println(pm.getMostPopularProduct("HawtDamnDiggidyDog"));
-        System.out.println(Double.toString(sm.getTotalProfitOfStore("HawtDamnDiggidyDog")));
+        SalesManager sales_manager = new SalesManager();
+        
+        sales_manager.getListOfTicketsByFair("Winter Fair");
     
     }
 }

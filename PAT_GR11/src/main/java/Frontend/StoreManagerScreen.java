@@ -2,6 +2,7 @@ package Frontend;
 
 import Backend.DataTypes.Product;
 import Backend.DataTypes.Store;
+import Backend.ManagerClasses.FairManager;
 import Backend.ManagerClasses.ProductManager;
 import Backend.ManagerClasses.StoreManager;
 import Backend.Utility.DB;
@@ -35,7 +36,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     public String store_name;
     private StoreManager sm = new StoreManager();
     private ProductManager pm = new ProductManager();
-    
+    private FairManager fm = new FairManager();
             
     public StoreManagerScreen() throws ClassNotFoundException, SQLException {
         this.db = new DB();
@@ -54,35 +55,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         initializeCategories(category_combo_box);
         initializeAvailableProductsList(available_products_list);
 
-        
-//        
-//        //table
-//        String [] column_names = new String[3];
-//        column_names[0] = "Name";
-//        column_names[1] = "Price";
-//        column_names[2] = "Time";
-//        
-//        String [][] data = new String[50][3];
-//        data[0][0] = "john";
-//        data[0][1] = "shelby";
-//        data[0][2] = "30";
-//        data[1][0] = "Emma";
-//        data[1][1] = "Watson";
-//        data[1][2] = "30";
-//        
-//        DefaultTableModel tbl_model = new DefaultTableModel(data, column_names);
-//        list_of_sales.setModel(tbl_model);
-//        
-//        
-   
-        String []column_names = new String[5];
-        column_names[0] = "Product Name";
-        column_names[1] = "Selling Price";
-        column_names[2] = "Profit";
-        column_names[3] = "Category";
-        column_names[4] = "Quantity";
-        
-//        String [][] data
         
     }
 
@@ -428,6 +400,12 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jLabel11.setForeground(new java.awt.Color(254, 150, 103));
         jLabel11.setText("Total Sales");
 
+        total_sales_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                total_sales_fieldActionPerformed(evt);
+            }
+        });
+
         jLabel13.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(254, 150, 103));
         jLabel13.setText("Least Sold Product");
@@ -691,7 +669,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             most_popular_product_field.setText(pm.getMostPopularProduct(store_name_label.getText()));
             least_sold_product_field.setText(pm.getLeastPopularProduct(store_name_label.getText()));
             total_profit_field.setText(Double.toString(sm.getTotalProfitOfStore(store_name_label.getText())));
-            
+            total_sales_field.setText(Integer.toString(sm.getNumsalesOfStore(store_name_label.getText())));
             
         } catch (SQLException ex) {
             Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -809,7 +787,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             
                         pm.sellProduct(p,quantity);
                         sm.increaseProfitBySale(getCurrentStore(store_name_label.getText()), p,quantity);
-            
+                        fm.setFairProfit(getCurrentStore(store_name_label.getText()).getFair_name());
             
         } catch (SQLException ex) {
             Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -826,6 +804,10 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         product_name_text_field.setText(selected_product.getProductName());
         product_price_text_field.setText(Double.toString(selected_product.getSellingPrice()));
     }//GEN-LAST:event_available_products_listMouseClicked
+
+    private void total_sales_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_total_sales_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_total_sales_fieldActionPerformed
 
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);

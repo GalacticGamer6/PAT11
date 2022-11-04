@@ -642,6 +642,9 @@
             <Component class="javax.swing.JTextField" name="total_profit_field">
             </Component>
             <Component class="javax.swing.JTextField" name="total_sales_field">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="total_sales_fieldActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>

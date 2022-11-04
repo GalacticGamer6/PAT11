@@ -169,6 +169,13 @@ public class StoreManager {
         return customers_served;
     }
     
+    public void increaseCustomersServed(String store_name){
+        
+        String query = "UPDATE tblstores SET customers_served = customers_served + 1 WHERE store_name = " + "\"" + store_name + "\"" + ";";
+        
+        
+    }
+    
     public double getTotalProfitOfStore(String store_name) throws SQLException{
         
         String statement = "SELECT Profit FROM neeraavrDB.tblstores WHERE store_name = " + "\"" + store_name + "\"" + ";";
@@ -179,6 +186,16 @@ public class StoreManager {
         
         return total_profit;
         
+    }
+    
+    public int getNumsalesOfStore(String store_name) throws SQLException{
+        
+        String statement = "SELECT SUM(num_sold) FROM neeraavrDB.tblproducts WHERE store = " + "\"" + store_name + "\"" + ";";
+        ResultSet rs = db.query(statement);
+        
+        rs.next();
+        int num_sales = rs.getInt("SUM(num_sold)");
+        return num_sales;
     }
     
     

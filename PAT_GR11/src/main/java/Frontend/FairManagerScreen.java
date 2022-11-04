@@ -101,17 +101,9 @@ public class FairManagerScreen extends javax.swing.JFrame {
         total_profit_of_fair = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         most_popular_store_field = new javax.swing.JTextField();
-        total_from_gates_field = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        tickets_sold_field = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        most_popular_product_field = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         least_popular_store_field = new javax.swing.JTextField();
-        least_popular_product_field = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
         user_management_screen_label2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         panel_middle = new javax.swing.JPanel();
@@ -171,6 +163,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
                 "Day", "Tickets Sold", "Total"
             }
         ));
+        Ticket_sales_table.setEnabled(false);
         jScrollPane1.setViewportView(Ticket_sales_table);
 
         user_management_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
@@ -290,31 +283,9 @@ public class FairManagerScreen extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(254, 150, 103));
         jLabel14.setText("Least Popular Store");
 
-        tickets_sold_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tickets_sold_fieldActionPerformed(evt);
-            }
-        });
-
-        jLabel23.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel23.setText("Tickets Sold");
-
-        jLabel24.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel24.setText("Most Popular Product");
-
-        jLabel25.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel25.setText("Least Popular Product");
-
         jLabel26.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(254, 150, 103));
         jLabel26.setText("Most Popular Store");
-
-        jLabel27.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel27.setText("Total From Gates");
 
         user_management_screen_label2.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         user_management_screen_label2.setForeground(new java.awt.Color(254, 150, 103));
@@ -330,44 +301,24 @@ public class FairManagerScreen extends javax.swing.JFrame {
             .addGroup(fair_statistics_panelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                        .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tickets_sold_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(total_from_gates_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(user_management_screen_label2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(fair_statistics_panelLayout.createSequentialGroup()
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(36, 36, 36)
+                            .addComponent(total_profit_of_fair, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(fair_statistics_panelLayout.createSequentialGroup()
                                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(most_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(most_popular_product_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fair_statistics_panelLayout.createSequentialGroup()
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(least_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(least_popular_product_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(total_profit_of_fair, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))
-                    .addGroup(fair_statistics_panelLayout.createSequentialGroup()
-                        .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(user_management_screen_label2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(36, 36, 36)
+                                .addComponent(least_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(27, 503, Short.MAX_VALUE))
         );
         fair_statistics_panelLayout.setVerticalGroup(
             fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,32 +327,19 @@ public class FairManagerScreen extends javax.swing.JFrame {
                 .addComponent(user_management_screen_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tickets_sold_field)
-                    .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(most_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(most_popular_product_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total_from_gates_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(most_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(least_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(least_popular_product_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(236, 236, 236)
+                    .addComponent(least_popular_store_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
                 .addGroup(fair_statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(total_profit_of_fair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                .addGap(94, 94, 94))
         );
 
         parent_panel.add(fair_statistics_panel, "card4");
@@ -600,16 +538,25 @@ public class FairManagerScreen extends javax.swing.JFrame {
 
     private void fair_statistics_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fair_statistics_button_panelMouseClicked
         
-        //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(fair_statistics_button_panel, current_button,fair_statistics_label,current_label);
-        current_button = fair_statistics_button_panel;
-        current_label = fair_statistics_label;
-        
-        //changes the card layout to bring up the dashboard panel
-        parent_panel.removeAll();
-        parent_panel.add(fair_statistics_panel);
-        parent_panel.repaint();
-        parent_panel.revalidate();
+        try {
+            //changes colour of panels and labels to show a tab is selected
+            changeBackgroundColor(fair_statistics_button_panel, current_button,fair_statistics_label,current_label);
+            current_button = fair_statistics_button_panel;
+            current_label = fair_statistics_label;
+            
+            most_popular_store_field.setText(fm.getMostPopularStore(fair_name_label.getText()));
+            least_popular_store_field.setText(fm.getMostPopularStore(fair_name_label.getText()));
+            total_profit_of_fair.setText(Double.toString(fm.getFairProfit(fair_name_label.getText())));
+            
+            
+            //changes the card layout to bring up the dashboard panel
+            parent_panel.removeAll();
+            parent_panel.add(fair_statistics_panel);
+            parent_panel.repaint();
+            parent_panel.revalidate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_fair_statistics_button_panelMouseClicked
 
     private void stores_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stores_button_panelMouseClicked
@@ -636,11 +583,8 @@ public class FairManagerScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_back_buttonActionPerformed
 
-    private void tickets_sold_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tickets_sold_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tickets_sold_fieldActionPerformed
-
     private void sell_tickets_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_tickets_buttonActionPerformed
+
         String product_name = "Ticket";
         String store = "";
         String Fair = fair_name_label.getText();
@@ -662,6 +606,7 @@ public class FairManagerScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_sell_tickets_buttonActionPerformed
 
     private void num_people_spinnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_num_people_spinnerMouseClicked
@@ -769,43 +714,6 @@ public class FairManagerScreen extends javax.swing.JFrame {
         
     }
     
-    private void getNumberOfTicket
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(store_manager_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(store_manager_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(store_manager_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(store_manager_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new store_manager_dashboard().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Ticket_sales_table;
@@ -821,19 +729,13 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField least_popular_product_field;
     private javax.swing.JTextField least_popular_store_field;
-    private javax.swing.JTextField most_popular_product_field;
     private javax.swing.JTextField most_popular_store_field;
     public javax.swing.JLabel my_fair_lady_label;
     private javax.swing.JSpinner num_people_spinner;
@@ -846,8 +748,6 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private javax.swing.JTable stores_of_fair_table;
     private javax.swing.JPanel stores_panel;
     private javax.swing.JTextField ticket_total_price_field;
-    private javax.swing.JTextField tickets_sold_field;
-    private javax.swing.JTextField total_from_gates_field;
     private javax.swing.JTextField total_profit_of_fair;
     private javax.swing.JLabel user_management_screen_label;
     private javax.swing.JLabel user_management_screen_label1;

@@ -126,6 +126,36 @@ public class FairManager {
         
     }    
     
+   public double getFairProfit(String fair_name) throws SQLException{
+       String get_fair_total_profit = "SELECT SUM(Profit) FROM neeraavrDB.tblstores WHERE Fair = " + "\"" + fair_name + "\"" + ";";
+       ResultSet rs = db.query(get_fair_total_profit);
+       double total_profit = rs.getDouble("SUM(Profit)");
+       return total_profit;
+       
+   } 
     
+   public void setFairProfit(String fair_name) throws SQLException{
+       
+       String get_fair_total_profit = "SELECT SUM(Profit) FROM neeraavrDB.tblstores WHERE Fair = " + "\"" + fair_name + "\"" + ";";
+       ResultSet rs = db.query(get_fair_total_profit);
+       double total_profit = rs.getDouble("SUM(Profit)");
+       
+       String set_total_profit = "UPDATE tblfairs SET profit =" + "\"" + total_profit + "\""  + " WHERE fair_name = " + "\"" + fair_name + "\"" + ";";
+       db.update(set_total_profit);
+   }
+   
+   public String getMostPopularStore(String fair_name) throws SQLException{
+       
+       String query = "SELECT store_name from tblstores WHERE Fair = " + "\"" + fair_name + "\"" + "ORDER BY customers_served DESC LIMIT 1;";
+       ResultSet rs = db.query(query);
+       return Integer.toString(rs.getInt("store_name"));
+   }
+   
+   public String getLeastPopularStore(String fair_name) throws SQLException{
+       
+       String query = "SELECT store_name from tblstores WHERE Fair = " + "\"" + fair_name + "\"" + "ORDER BY customers_served ASC LIMIT 1;";
+       ResultSet rs = db.query(query);
+       return Integer.toString(rs.getInt("store_name"));
+   }   
     
 }
