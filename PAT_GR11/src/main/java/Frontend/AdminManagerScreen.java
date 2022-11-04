@@ -512,6 +512,11 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         jLabel16.setText("SELECT THE STORE OWNER/FAIR OWNER/ADMIN");
 
         delete_user_button.setText("DELETE USER");
+        delete_user_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_user_buttonActionPerformed(evt);
+            }
+        });
 
         access_level_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -808,6 +813,7 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         current_button = user_management_button_panel;
         current_label = user_management_label;
         try {
+            initialiseUsersComboBox(users_combo_box);
             initializeUsersTable(users_table);
         } catch (SQLException ex) {
             Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -946,6 +952,16 @@ public class AdminManagerScreen extends javax.swing.JFrame{
             user_fairorstore_combo_box.setModel(cbm);
         }
     }//GEN-LAST:event_access_level_listMouseClicked
+
+    private void delete_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_user_buttonActionPerformed
+        String user_name = (String)users_combo_box.getSelectedItem();
+        try {
+            um.deleteUser(user_name);
+            initializeUsersTable(users_table);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_delete_user_buttonActionPerformed
 
     private void initialiseAcessLevelComboBox(JComboBox b){
         
@@ -1105,7 +1121,18 @@ public class AdminManagerScreen extends javax.swing.JFrame{
         }
         b.setModel(cbm);  
         
-    }    
+    }
+
+    private void initialiseUsersComboBox(JComboBox b){
+        
+        DefaultComboBoxModel lm = new DefaultComboBoxModel();
+        for(int i = 0; i < um.getUserNames().length;i++){
+            lm.addElement(um.getUserNames()[i]);
+        
+        }
+        b.setModel(lm);
+        
+    }
     
 
     

@@ -57,6 +57,12 @@ public class UserManager {
         }
         return output;
     }
+    
+    public void deleteUser(String username) throws SQLException{
+        
+        String statement = "DELETE FROM tblusers WHERE Username = " + "\"" + username + "\"" + ";";
+        MyFairLadyDB.update(statement);
+    }
 
     public void addUser(User u) throws SQLException{
         
@@ -97,6 +103,19 @@ public class UserManager {
         
         return user_list;
         
-    }    
+    }
+
+    public String [] getUserNames(){
+        
+        String output[] = new String[50];
+        
+        for(int i = 0; i < size;i++){
+            
+            output[i] = user_list[i].getUsername();
+            
+        }
+        return output;
+    }      
+    
     
 }
