@@ -1,6 +1,7 @@
 package Backend.ManagerClasses;
 
 import Backend.DataTypes.Fair;
+import Backend.DataTypes.Product;
 import Backend.DataTypes.Store;
 import Backend.Utility.DB;
 import java.sql.ResultSet;
@@ -147,6 +148,27 @@ public class StoreManager {
         
         return store_list;
         
-    }    
+    }
+
+    public void increaseProfitBySale(Store s, Product p,int q) throws SQLException{
+        
+        String query = "UPDATE tblstores SET Profit = Profit + " + "\"" + p.getProfit()*q + "\"" + "WHERE store_name = " + "\"" + s.getStore_name() + "\"" + ";";
+        db.update(query);
+        String query2 = "UPDATE tblstores SET customers_served = customers_served + " + "\"" + 1 + "\"" + "WHERE store_name = " + "\"" + s.getStore_name() + "\"" + ";";
+        db.update(query2);
+    }
+    
+    public int getCustomersServed(String store_name) throws SQLException{
+        
+        int customers_served = 0;
+        String query = "SELECT customers_served FROM tblstores ORDER BY customers_served DESC LIMIT 1; ";
+        ResultSet rs = db.query(query);
+            
+        customers_served = rs.getInt("customers_served");
+        
+        return customers_served;
+    }
+    
+    
     
 }

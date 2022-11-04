@@ -119,10 +119,13 @@ public class ProductManager {
         return products_list[pos];
     }
     
-    public void decreaseProduct(Product p){
+    //use store and product name
+    public void sellProduct(Product p, int q) throws SQLException{
         
-        int reduced_quantity = p.getQuantity() - 1;
-        p.setQuantity(reduced_quantity);
+        
+        String query = "UPDATE tblproducts SET Quantity = Quantity - " + "\"" + q + "\"" + ", num_sold = num_sold + " + "\"" + q + "\"" + "WHERE fair = " + "\"" + p.getFair() + "\"" + "AND product_name = " + "\"" + p.getProductName() + "\"" + ";";
+        System.out.println("Query from sell product: " + query);
+        MyFairLadyDB.update(query);
         
         //then we need to update the if product values in the database
         //the num sold should go up, the product quantity should go down, the total profit of the store should increase

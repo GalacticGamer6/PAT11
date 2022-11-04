@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -93,13 +94,16 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         sales_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         available_products_list = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        list_of_sales = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
         sell_products_button = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
         sales_manager_screen_label = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel17 = new javax.swing.JLabel();
+        product_name_text_field = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        product_price_text_field = new javax.swing.JTextField();
+        product_quantity_spinner = new javax.swing.JSpinner();
         inventory_panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         product_list_table = new javax.swing.JTable();
@@ -122,8 +126,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         sales_manager_screen_label1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         statistics_panel = new javax.swing.JPanel();
-        statistics_panel_label = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -134,9 +136,9 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jLabel13 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        customers_served_field = new javax.swing.JTextField();
+        stats_screen_label = new javax.swing.JLabel();
         panel_middle = new javax.swing.JPanel();
         panel_left = new javax.swing.JPanel();
         sales_button_panel = new javax.swing.JPanel();
@@ -162,28 +164,24 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        available_products_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                available_products_listMouseClicked(evt);
+            }
+        });
+        available_products_list.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                available_products_listPropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(available_products_list);
 
-        list_of_sales.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Name", "Price", "Time"
-            }
-        ));
-        jScrollPane2.setViewportView(list_of_sales);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         sell_products_button.setText("Sell");
-
-        jLabel16.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel16.setText("CATEGORY");
+        sell_products_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sell_products_buttonActionPerformed(evt);
+            }
+        });
 
         sales_manager_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         sales_manager_screen_label.setForeground(new java.awt.Color(254, 150, 103));
@@ -192,6 +190,22 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         jSeparator1.setForeground(new java.awt.Color(254, 150, 103));
 
+        jLabel17.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Product Name :");
+
+        jLabel18.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(254, 150, 103));
+        jLabel18.setText("ORDER INFO:");
+
+        jLabel19.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Quantity:");
+
+        jLabel20.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Price:");
+
         javax.swing.GroupLayout sales_panelLayout = new javax.swing.GroupLayout(sales_panel);
         sales_panel.setLayout(sales_panelLayout);
         sales_panelLayout.setHorizontalGroup(
@@ -199,40 +213,55 @@ public class StoreManagerScreen extends javax.swing.JFrame{
             .addGroup(sales_panelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
                     .addGroup(sales_panelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(sell_products_button))
-                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)
                         .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(product_price_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(product_name_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sell_products_button, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(product_quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         sales_panelLayout.setVerticalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_panelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sales_panelLayout.createSequentialGroup()
-                        .addComponent(sales_manager_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(product_name_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(product_price_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(product_quantity_spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
                 .addComponent(sell_products_button)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         parent_panel.add(sales_panel, "card2");
@@ -316,7 +345,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,23 +424,6 @@ public class StoreManagerScreen extends javax.swing.JFrame{
 
         statistics_panel.setBackground(new java.awt.Color(246, 70, 104));
 
-        try{
-            Font font = Font.createFont(Font.TRUETYPE_FONT,
-                new File("AmbarPearlPersonalUse-0nBz.ttf"));
-            Font bold = font.deriveFont(Font.BOLD, 12);
-            Font plain = font.deriveFont(Font.PLAIN, 24);
-            statistics_panel_label.setForeground(new java.awt.Color(254, 150, 103));
-            statistics_panel_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            statistics_panel_label.setText("Statistics");
-            statistics_panel_label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        } catch (FontFormatException | IOException e){
-            e.printStackTrace();
-        }
-
-        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(254, 150, 103));
-        jLabel9.setText("PERIOD");
-
         jLabel10.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(254, 150, 103));
         jLabel10.setText("Total Profit");
@@ -432,11 +444,14 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         jLabel14.setForeground(new java.awt.Color(254, 150, 103));
         jLabel14.setText("Customers Served");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel15.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(254, 150, 103));
         jLabel15.setText("Most Sold Product");
+
+        stats_screen_label.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        stats_screen_label.setForeground(new java.awt.Color(254, 150, 103));
+        stats_screen_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        stats_screen_label.setText("STATISTICS");
 
         javax.swing.GroupLayout statistics_panelLayout = new javax.swing.GroupLayout(statistics_panel);
         statistics_panel.setLayout(statistics_panelLayout);
@@ -446,14 +461,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                 .addContainerGap()
                 .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statistics_panelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 542, Short.MAX_VALUE)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
-                    .addGroup(statistics_panelLayout.createSequentialGroup()
-                        .addComponent(statistics_panel_label, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(417, Short.MAX_VALUE))
                     .addGroup(statistics_panelLayout.createSequentialGroup()
                         .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(statistics_panelLayout.createSequentialGroup()
@@ -471,34 +483,28 @@ public class StoreManagerScreen extends javax.swing.JFrame{
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(statistics_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, statistics_panelLayout.createSequentialGroup()
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField9))
+                                    .addComponent(customers_served_field))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, statistics_panelLayout.createSequentialGroup()
                                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(stats_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         statistics_panelLayout.setVerticalGroup(
             statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statistics_panelLayout.createSequentialGroup()
-                .addComponent(statistics_panel_label, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
+                .addContainerGap()
+                .addComponent(stats_screen_label, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
                 .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                    .addComponent(customers_served_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(statistics_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -717,6 +723,12 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private void statistics_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistics_button_panelMouseClicked
         changeBackgroundColor(statistics_button_panel, current_button,statistics_label,current_label);
         
+        try {
+            customers_served_field.setText(Integer.toString(sm.getCustomersServed(store_name_label.getText())));
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         current_button = statistics_button_panel;
         current_label = statistics_label;
         
@@ -819,6 +831,34 @@ public class StoreManagerScreen extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_remove_product_buttonActionPerformed
 
+    private void sell_products_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_products_buttonActionPerformed
+        try {
+            
+            int quantity = (int)product_quantity_spinner.getValue();
+            
+            Product p = pm.getProduct(product_name_text_field.getText());
+            
+            
+                        pm.sellProduct(p,quantity);
+                        sm.increaseProfitBySale(getCurrentStore(store_name_label.getText()), p,quantity);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sell_products_buttonActionPerformed
+
+    private void available_products_listPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_available_products_listPropertyChange
+
+        
+    }//GEN-LAST:event_available_products_listPropertyChange
+
+    private void available_products_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_available_products_listMouseClicked
+        Product selected_product = pm.getProduct(available_products_list.getSelectedValue());
+        product_name_text_field.setText(selected_product.getProductName());
+        product_price_text_field.setText(Double.toString(selected_product.getSellingPrice()));
+    }//GEN-LAST:event_available_products_listMouseClicked
+
     private void changeBackgroundColor(JPanel newP, JPanel oldP,JLabel newL,JLabel oldL){
         Color off = new Color(65,67,106);
         Color on = new Color(254,150,103);
@@ -898,6 +938,8 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     
 
     
+
+    
     
     /**
      * @param args the command line arguments
@@ -940,12 +982,11 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JButton back_button;
     private javax.swing.JComboBox<String> category_combo_box;
     private javax.swing.JTextField cost_price_field;
+    private javax.swing.JTextField customers_served_field;
     private javax.swing.JPanel inventory_button_panel;
     private javax.swing.JLabel inventory_label;
     private javax.swing.JPanel inventory_panel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -953,17 +994,18 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -972,14 +1014,15 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JTable list_of_sales;
     private javax.swing.JLabel logo_label;
     private javax.swing.JPanel panel_left;
     private javax.swing.JPanel panel_middle;
     private javax.swing.JPanel parent_panel;
     private javax.swing.JTable product_list_table;
     private javax.swing.JTextField product_name_field;
+    private javax.swing.JTextField product_name_text_field;
+    private javax.swing.JTextField product_price_text_field;
+    private javax.swing.JSpinner product_quantity_spinner;
     private javax.swing.JSpinner quantity_spinner;
     private javax.swing.JButton remove_product_button;
     private javax.swing.JPanel sales_button_panel;
@@ -992,7 +1035,7 @@ public class StoreManagerScreen extends javax.swing.JFrame{
     private javax.swing.JPanel statistics_button_panel;
     private javax.swing.JLabel statistics_label;
     private javax.swing.JPanel statistics_panel;
-    private javax.swing.JLabel statistics_panel_label;
+    private javax.swing.JLabel stats_screen_label;
     public javax.swing.JLabel store_name_label;
     // End of variables declaration//GEN-END:variables
 }

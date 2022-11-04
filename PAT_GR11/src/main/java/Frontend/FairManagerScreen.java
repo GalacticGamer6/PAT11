@@ -685,9 +685,11 @@ public class FairManagerScreen extends javax.swing.JFrame {
         int num_sold = (int)num_people_spinner.getValue();
         
         Product ticket = new Product(product_name,store,Fair,selling_price,cost_price,profit,category,quantity,num_sold);
+        System.out.println(ticket.toString());
         LocalDate date = LocalDate.now();
         
         Sale s = new Sale(ticket,store,Fair,date,profit);
+        System.out.println(s.toString());
         try {
             sales_manager.addSale(s);
         } catch (SQLException ex) {
@@ -767,6 +769,8 @@ public class FairManagerScreen extends javax.swing.JFrame {
         
         
     }
+    
+    private void getNumberOfTicket
     
     
     /**
