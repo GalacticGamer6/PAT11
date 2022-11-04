@@ -85,7 +85,9 @@ public class SalesManager {
         
         return sales_list;
         
-    }    
+    }
+
+    private 
     
 //    public Sale getSalesByStore(String store_name) throws SQLException{
 //        

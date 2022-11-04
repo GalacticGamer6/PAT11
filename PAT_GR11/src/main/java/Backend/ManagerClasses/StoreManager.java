@@ -169,6 +169,19 @@ public class StoreManager {
         return customers_served;
     }
     
+    public double getTotalProfitOfStore(String store_name) throws SQLException{
+        
+        String statement = "SELECT Profit FROM neeraavrDB.tblstores WHERE store_name = " + "\"" + store_name + "\"" + ";";
+        ResultSet rs = db.query(statement);
+        
+        rs.next();
+        double total_profit = rs.getDouble("Profit");
+        
+        return total_profit;
+        
+    }
+    
+    
     
     
 }

@@ -132,6 +132,24 @@ public class ProductManager {
         
     }
     
+    public String getMostPopularProduct(String store_name) throws SQLException{
+        
+        String statement = "SELECT product_name FROM neeraavrDB.tblproducts WHERE store = " + "\"" + store_name + "\"" + " ORDER BY num_sold DESC LIMIT 1;";
+        ResultSet rs = MyFairLadyDB.query(statement);
+        rs.next();
+        String popular_product = rs.getString("product_name");
+        return popular_product;
+    }
+    
+    public String getLeastPopularProduct(String store_name) throws SQLException{
+        
+        String statement = "SELECT product_name FROM neeraavrDB.tblproducts WHERE store = " + "\"" + store_name + "\"" + " ORDER BY num_sold ASC LIMIT 1;";
+        ResultSet rs = MyFairLadyDB.query(statement);
+        rs.next();
+        String unpopular_product = rs.getString("product_name");
+        return unpopular_product;
+    }    
+    
     
     
     

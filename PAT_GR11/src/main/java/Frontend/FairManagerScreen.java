@@ -630,25 +630,6 @@ public class FairManagerScreen extends javax.swing.JFrame {
         parent_panel.revalidate();
     }//GEN-LAST:event_stores_button_panelMouseClicked
 
-    private void entrance_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrance_button_panelMouseClicked
-        
-        //changes colour of panels and labels to show a tab is selected
-        changeBackgroundColor(entrance_button_panel, current_button,entrance_management_label,current_label);
-        current_button = entrance_button_panel;
-        current_label = entrance_management_label;
-        try {
-            initialiseTicketSalesTable(Ticket_sales_table);
-        } catch (SQLException ex) {
-            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //changes the card layout to bring up the dashboard panel
-        parent_panel.removeAll();
-        parent_panel.add(entrance_management_panel);
-        parent_panel.repaint();
-        parent_panel.revalidate();
-
-    }//GEN-LAST:event_entrance_button_panelMouseClicked
-
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
         LoginScreen ls = new LoginScreen();
         ls.setVisible(true);
@@ -658,6 +639,30 @@ public class FairManagerScreen extends javax.swing.JFrame {
     private void tickets_sold_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tickets_sold_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tickets_sold_fieldActionPerformed
+
+    private void sell_tickets_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_tickets_buttonActionPerformed
+        String product_name = "Ticket";
+        String store = "";
+        String Fair = fair_name_label.getText();
+        double selling_price = getCurrentFair(fair_name_label.getText()).getEntry_fee();
+        double cost_price = 0;
+        double profit = selling_price - cost_price;
+        String category = "";
+        int quantity = 0;
+        int num_sold = (int)num_people_spinner.getValue();
+
+        Product ticket = new Product(product_name,store,Fair,selling_price,cost_price,profit,category,quantity,num_sold);
+        System.out.println(ticket.toString());
+        LocalDate date = LocalDate.now();
+
+        Sale s = new Sale(ticket,store,Fair,date,profit);
+        System.out.println(s.toString());
+        try {
+            sales_manager.addSale(s);
+        } catch (SQLException ex) {
+            Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sell_tickets_buttonActionPerformed
 
     private void num_people_spinnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_num_people_spinnerMouseClicked
         int num_people = (int)num_people_spinner.getValue();
@@ -673,29 +678,23 @@ public class FairManagerScreen extends javax.swing.JFrame {
         ticket_total_price_field.setText("" + total);
     }//GEN-LAST:event_num_people_spinnerStateChanged
 
-    private void sell_tickets_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_tickets_buttonActionPerformed
-        String product_name = "Ticket";
-        String store = "";
-        String Fair = fair_name_label.getText();
-        double selling_price = getCurrentFair(fair_name_label.getText()).getEntry_fee();
-        double cost_price = 0;
-        double profit = selling_price - cost_price;
-        String category = "";
-        int quantity = 0;
-        int num_sold = (int)num_people_spinner.getValue();
-        
-        Product ticket = new Product(product_name,store,Fair,selling_price,cost_price,profit,category,quantity,num_sold);
-        System.out.println(ticket.toString());
-        LocalDate date = LocalDate.now();
-        
-        Sale s = new Sale(ticket,store,Fair,date,profit);
-        System.out.println(s.toString());
+    private void entrance_button_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrance_button_panelMouseClicked
+
+        //changes colour of panels and labels to show a tab is selected
+        changeBackgroundColor(entrance_button_panel, current_button,entrance_management_label,current_label);
+        current_button = entrance_button_panel;
+        current_label = entrance_management_label;
         try {
-            sales_manager.addSale(s);
+            initialiseTicketSalesTable(Ticket_sales_table);
         } catch (SQLException ex) {
             Logger.getLogger(FairManagerScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_sell_tickets_buttonActionPerformed
+        //changes the card layout to bring up the dashboard panel
+        parent_panel.removeAll();
+        parent_panel.add(entrance_management_panel);
+        parent_panel.repaint();
+        parent_panel.revalidate();
+    }//GEN-LAST:event_entrance_button_panelMouseClicked
 
     private Fair getCurrentFair(String fair_name){
         return fm.searchStore(fair_name);

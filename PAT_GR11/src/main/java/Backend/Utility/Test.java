@@ -40,5 +40,10 @@ public class Test {
 //            System.out.println(arr.get(i).getProductName());
 //        }
         
+        ProductManager pm = new ProductManager();
+        StoreManager sm = new StoreManager();
+        System.out.println(pm.getMostPopularProduct("HawtDamnDiggidyDog"));
+        System.out.println(Double.toString(sm.getTotalProfitOfStore("HawtDamnDiggidyDog")));
+    
     }
 }
